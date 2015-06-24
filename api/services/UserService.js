@@ -111,7 +111,7 @@ module.exports = {
 				res.end(JSON.stringify(result));
 			} else {
 				if (err != null) {
-					var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
+					var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:err}};
 					res.end(JSON.stringify(result));
 				} else {
 					var userInfo = UserService.initUserInfo(param);
