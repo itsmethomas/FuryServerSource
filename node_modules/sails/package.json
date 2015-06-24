@@ -1,0 +1,148 @@
+{
+  "name": "sails",
+  "author": {
+    "name": "Mike McNeil",
+    "email": "mike@balderdash.co"
+  },
+  "version": "0.10.0",
+  "description": "API-driven framework for building realtime apps, using MVC conventions (based on Express and Socket.io)",
+  "homepage": "http://sailsjs.org",
+  "keywords": [
+    "mvc",
+    "web-framework",
+    "express",
+    "sails",
+    "sailsjs",
+    "sails.js",
+    "REST",
+    "API",
+    "orm",
+    "socket.io"
+  ],
+  "main": "./lib/index.js",
+  "bin": {
+    "sails": "./bin/sails.js"
+  },
+  "scripts": {
+    "test": "mocha",
+    "prepublish": "npm prune",
+    "pretest": "node test/.installDependencies"
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "express": "3.4.3",
+    "rc": "~0.3.3",
+    "sails-stringfile": "~0.3.0",
+    "async": "~0.2.9",
+    "lodash": "~2.4.1",
+    "optimist": "~0.3.4",
+    "captains-log": "~0.11.1",
+    "reportback": "~0.1.4",
+    "sails-util": "~0.10.0",
+    "colors": "~0.6.2",
+    "waterline": "git://github.com/balderdashy/waterline.git#v0.10",
+    "socket.io": "~0.9.14",
+    "connect-flash": "~0.1.1",
+    "pluralize": "~0.0.5",
+    "node-uuid": "~1.4.0",
+    "ejs-locals": "~1.0.2",
+    "glob": "~3.1.14",
+    "i18n": "~0.4.1",
+    "sails-generate": "~0.0.13",
+    "include-all": "~0.1.2",
+    "sails-build-dictionary": "0.1.0",
+    "connect-redis": "~1.4.5",
+    "connect-mongo": "~0.3.2",
+    "grunt-cli": "~0.1.11",
+    "ejs": "~0.8.4",
+    "sails-disk": "git://github.com/balderdashy/sails-disk.git#v0.10",
+    "commander": "~2.1.0",
+    "enpeem": "~0.1.1",
+    "grunt": "0.4.2",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-clean": "~0.4.1",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-sails-linker": "~0.9.5",
+    "grunt-contrib-jst": "~0.5.0",
+    "grunt-contrib-watch": "~0.4.4",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-cssmin": "~0.6.1",
+    "grunt-contrib-less": "~0.9.0",
+    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-sync": "~0.0.4"
+  },
+  "optionalDependencies": {
+    "waterline": "git://github.com/balderdashy/waterline.git#v0.10",
+    "socket.io": "~0.9.14",
+    "connect-flash": "~0.1.1",
+    "pluralize": "~0.0.5",
+    "node-uuid": "~1.4.0",
+    "ejs-locals": "~1.0.2",
+    "glob": "~3.1.14",
+    "i18n": "~0.4.1",
+    "sails-generate": "~0.0.13",
+    "include-all": "~0.1.2",
+    "sails-build-dictionary": "0.1.0",
+    "connect-redis": "~1.4.5",
+    "connect-mongo": "~0.3.2",
+    "grunt-cli": "~0.1.11",
+    "ejs": "~0.8.4",
+    "sails-disk": "git://github.com/balderdashy/sails-disk.git#v0.10",
+    "commander": "~2.1.0",
+    "enpeem": "~0.1.1",
+    "grunt": "0.4.2",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-clean": "~0.4.1",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-sails-linker": "~0.9.5",
+    "grunt-contrib-jst": "~0.5.0",
+    "grunt-contrib-watch": "~0.4.4",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-cssmin": "~0.6.1",
+    "grunt-contrib-less": "~0.9.0",
+    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-sync": "~0.0.4"
+  },
+  "testDependencies": {
+    "root-require": "~0.2.0",
+    "checksum": "~0.1.1",
+    "request": "*",
+    "wrench": "~1.5.1",
+    "benchmark": "~1.0.0",
+    "microtime": "~0.5.1",
+    "colors": "~0.6.2",
+    "expect.js": "~0.2.0",
+    "should": "~2.1.1",
+    "supertest": "~0.8.2",
+    "fs-extra": "~0.8.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/balderdashy/sails.git#v0.10"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://links.sailsjs.org/license/mit"
+    }
+  ],
+  "bugs": {
+    "url": "http://github.com/balderdashy/sails/issues"
+  },
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "sails": {
+    "prerelease": "git://github.com/balderdashy/sails.git#v0.10"
+  },
+  "gitHead": "e2d690b24e53135a1643ec3c7c30714b86bfea99",
+  "readme": "# [![Sails.js](http://balderdashy.github.io/sails/images/logo.png)](http://sailsjs.org)\r\n\r\n### [Website](http://sailsjs.org/)  &nbsp; [Getting Started](http://sailsjs.org/#!getStarted) &nbsp;  [Documentation](http://sailsjs.org/#!documentation)  &nbsp; [Submit Issue](https://github.com/balderdashy/sails/search?q=&type=Issues)\r\n\r\nSails.js is a web framework that makes it easy to build custom, enterprise-grade Node.js apps. It is designed to resemble the MVC architecture from frameworks like Ruby on Rails, but with support for the more modern, data-oriented style of web app development. It's especially good for building realtime features like chat.\r\n\r\n\r\n## Installation\r\n\r\n**With [node](http://nodejs.org) [installed](http://sailsjs.org/#!documentation/new-to-nodejs):**\r\n```sh\r\n# Get the latest stable release of Sails\r\n$ sudo npm install sails -g\r\n```\r\n\r\n\r\n## Your First Sails Project\r\n\r\n**Create a new app:**\r\n```sh\r\n# Create the app\r\n$ sails new testProject\r\n```\r\n\r\n**Lift sails:**\r\n```sh\r\n# cd into the new folder\r\n$ cd testProject\r\n\r\n# fire up the server\r\n$ sails lift\r\n```\r\n\r\n**Generate a REST API:**\r\n\r\n[![ScreenShot](http://i.imgur.com/Ii88jlhl.png)](https://www.youtube.com/watch?v=GK-tFvpIR7c)\r\n\r\n\r\n## Compatibility\r\n\r\n[![NPM version](https://badge.fury.io/js/sails.png)](http://badge.fury.io/js/sails)\r\n\r\nSails is built on Node.js, Connect, Express, and Socket.io.\r\n\r\nSails [controllers](http://sailsjs.org/#!documentation/controllers) are compatible with Connect middleware, so in most cases, you can paste code into Sails from an existing Express project and everything will work-- plus you'll be able to use WebSockets to talk to your API, and vice versa.\r\n\r\nThe ORM, [Waterline](https://github.com/balderdashy/waterline), has a well-defined adapter system for supporting all kinds of datastores.  Officially supported databases include **[MySQL](https://github.com/balderdashy/sails-mysql)**, **[PostgreSQL](https://github.com/balderdashy/sails-postgresql)**, **[MongoDB](https://github.com/balderdashy/sails-mongo)**, **[Redis](https://github.com/balderdashy/sails-redis)**, local [disk](https://github.com/balderdashy/sails-disk), and local [memory](https://github.com/balderdashy/sails-memory).  [Community adapters](https://github.com/balderdashy/sails-docs/blob/master/intro-to-custom-adapters.md#notable-community-adapters) exist for Riak, CouchDB, and ElasticSearch; for various 3rd-party REST APIs like Yelp and Twitter; plus some [eclectic projects](https://www.youtube.com/watch?v=OmcQZD_LIAE).\r\n\r\n\r\n\r\n\r\n<!--\r\nGenerate a JSON API:\r\n```sh\r\n# generate a user model + controller (i.e. a User API)\r\nsails generate user\r\n```\r\n-->\r\n\r\n<!--\r\n> Sails provides \"blueprint routes\" (URL mappings) and \"blueprint actions\" (built-in CRUD and pubsub operations) for every controller+model in your app. These \"blueprints\" can be configured and/or completely disabled as needed.  Notably, all logic in Sails (including blueprint actions) supports both WebSockets and HTTP out of the box.  \r\n\r\n+ List all users ([http://localhost:1337/user](http://localhost:1337/user))\r\n+ Find the user with id 1 ([http://localhost:1337/user/1](http://localhost:1337/user/1))\r\n+ Create a new user ([http://localhost:1337/user/create?name=Fisslewick](http://localhost:1337/user/create?name=Fisslewick), or `POST to http://localhost:1337/user`)\r\n+ Update the name of the user with id 1 ([http://localhost:1337/user/update/1?name=Gordo](http://localhost:1337/user/update/1?name=Gordo), or `PUT http://localhost:1337/user/1`)\r\n+ Destroy the user with id 1 (visit [http://localhost:1337/user/destroy/1](http://localhost:1337/user/destroy/1), or `DELETE http://localhost:1337/user/1`)\r\n-->\r\n\r\n\r\n## Issue Submission\r\nMake sure you've read the [issue submission guidelines](https://github.com/balderdashy/sails/blob/master/CONTRIBUTING.md#opening-issues) before opening a new issue.\r\n\r\nSails is composed of a [number of different sub-projects](https://npmjs.org/search?q=sails), many of which have [their own dedicated repository](https://github.com/search?q=sails+user%3Amikermcneil+user%3Abalderdashy+user%3Aparticlebanana&type=Repositories&ref=advsearch&l=). If you are looking for a repo for a particular piece, you'll usually find it on the [organization](https://github.com/balderdashy) page.\r\n\r\n## Feature Requests\r\nSee the [Trello board](https://trello.com/b/cGzNVE0b/sails-js-feature-requests) to view/discuss our roadmap and [request features](https://github.com/balderdashy/sails/blob/master/CONTRIBUTING.md#requesting-features).\r\n\r\n## Contribute\r\nSee the [contributing docs](https://github.com/balderdashy/sails/blob/master/CONTRIBUTING.md).\r\n\r\n\r\n## Support\r\nNeed help or have a question?\r\n\r\n- [Tutorials](https://github.com/balderdashy/sails-docs/blob/master/FAQ.md#where-do-i-get-help)\r\n- [Stackoverflow](http://stackoverflow.com/questions/tagged/sails.js)\r\n- [#sailsjs on Freenode](http://webchat.freenode.net/) (IRC channel)\r\n- [Professional/Enterprise Options](https://github.com/balderdashy/sails-docs/blob/master/FAQ.md#are-there-professional-support-options)\r\n\r\n_Please don't use the issue tracker for support/questions._\r\n\r\n## Links\r\n- [Website](http://sailsjs.org/)\r\n- [Official Documentation](http://sailsjs.org/#!documentation)\r\n- [Changelog](https://github.com/balderdashy/sails-docs/blob/0.9/changelog.md)\r\n- [Roadmap](https://github.com/balderdashy/sails-wiki/blob/0.9/roadmap.md)\r\n- [Google Group](https://groups.google.com/forum/?fromgroups#!forum/sailsjs)\r\n- [Twitter](https://twitter.com/sailsjs)\r\n- [SailsCasts](http://irlnathan.github.io/sailscasts/)\r\n\r\n\r\n\r\n## Team\r\nSails is actively built and maintained by [Balderdash](http://balderdash.co) ([@balderdashy](http://twitter.com/balderdashy)), a realtime web & mobile studio, with the help of these [contributors](https://github.com/balderdashy/sails/graphs/contributors):\r\n\r\n[![Mike McNeil](http://gravatar.com/avatar/199046437b76e6ca73e00b4cc182a1c5?s=144)](http://michaelmcneil.com) | [![Cody Stoltman](https://1.gravatar.com/avatar/368567acca0c5dfb9a4ff512c5c0c3fa?s=144)](http://particlebanana.com) |  [![Scott Gress](https://0.gravatar.com/avatar/b74e07aa543552709bf546ca279c9c67?s=144)](http://www.pigandcow.com/) | [![Greg Thornton](https://2.gravatar.com/avatar/b7c50edb558d5289331440f45ff600b0?s=144)](http://xdissent.com) | [![Zoli Kahan](http://gravatar.com/avatar/55dbeca986f875e1d1cb4d51e2fc42e4?s=144)](http://www.zolmeister.com/)\r\n:---:|:---:|:---:|:---:|:---:\r\n[Mike McNeil](http://michaelmcneil.com) | [Cody Stoltman](http://particlebanana.com) | [Scott Gress](https://github.com/sgress454) | [Greg Thornton](https://github.com/xdissent) | [Zoli Kahan](https://github.com/Zolmeister)\r\n\r\nBalderdash designs/builds scalable Node.js apps for startups and enterprise customers.  After building a few apps and taking them into production, we realized that the Node.js development landscape was very much still the Wild West.  Over time, after trying lots of different methodologies, we decided to crystallize all of our best practices into this framework.  [I](http://twitter.com/mikermcneil) hope it saves you some time :)\r\n\r\n\r\n## License\r\n\r\n[MIT License](http://sails.mit-license.org/)  Copyright © 2012-2014 Mike McNeil\r\n\r\n> Sails is built around so many great open-source technologies that it would never have crossed our minds to keep it proprietary.  We owe huge gratitude and props to TJ Holowaychuk ([@visionmedia](https://github.com/visionmedia)) and Guillermo Rauch ([@guille](https://github.com/guille)) for the work they did, as well as the stewards of all the other open-source modules we use.  Sails could never have been developed without your tremendous contributions to the node community.\r\n\r\n![image_squidhome@2x.png](http://i.imgur.com/RIvu9.png)\r\n\r\n[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/8acf2fc2ca0aca8a3018e355ad776ed7 \"githalytics.com\")](http://githalytics.com/balderdashy/sails)\r\n",
+  "readmeFilename": "README.md",
+  "_id": "sails@0.10.0",
+  "_shasum": "fb2466ca7b1c8e4133f2d4a7ac995346679ea390",
+  "_from": "git://github.com/balderdashy/sails.git#v0.10",
+  "_resolved": "git://github.com/balderdashy/sails.git#e2d690b24e53135a1643ec3c7c30714b86bfea99",
+  "_fromGithub": true
+}

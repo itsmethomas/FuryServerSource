@@ -1,0 +1,70 @@
+{
+  "data": {
+    "room": [],
+    "user": [],
+    "room_users__user_rooms": []
+  },
+  "schema": {
+    "room": {
+      "name": {
+        "type": "string"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "user": {
+      "name": {
+        "type": "string"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "room_users__user_rooms": {
+      "id": {
+        "primaryKey": true,
+        "unique": true,
+        "autoIncrement": true,
+        "type": "integer"
+      },
+      "room_users": {
+        "type": "integer",
+        "foreignKey": true,
+        "references": "room",
+        "on": "id",
+        "via": "user_rooms"
+      },
+      "user_rooms": {
+        "type": "integer",
+        "foreignKey": true,
+        "references": "user",
+        "on": "id",
+        "via": "room_users"
+      }
+    }
+  },
+  "counters": {
+    "room": {},
+    "user": {},
+    "room_users__user_rooms": {}
+  }
+}
