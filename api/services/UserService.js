@@ -106,6 +106,8 @@ module.exports = {
 
 	loginWithWeChat: function (param, res) {
 		User.find({weChatID:param.weChatID}, function (err, users) {
+			console.log(err);
+			console.log(users);
 			if (err == null && users.length > 0) {
 				var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:users[0]}};
 				res.end(JSON.stringify(result));
