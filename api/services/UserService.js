@@ -105,6 +105,7 @@ module.exports = {
 	},
 
 	loginWithWeChat: function (param, res) {
+		console.log(param);
 		User.find({weChatID:param.weChatID}, function (err, users) {
 			console.log(err);
 			console.log(users);
