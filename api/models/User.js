@@ -8,45 +8,51 @@
 module.exports = {
 		
 	attributes: {
-		Name: {
+		name: {
 			type: 'string',
 			required: true
 		},
-		Email: {
+		email: {
 			type: 'email', // Email type will get validated by the ORM
 			required: true
 		},
-		Password: {
+		password: {
 			type: 'string',
 		},
-		Gender: {
+		gender: {
 			type: 'string'
 		},
-		Birthday: {
+		birthday: {
 			type: 'date'
 		},
-		Height: {
+		height: {
 			type: 'string'
 		},
-		Job: {
+		job: {
 			type: 'string'
 		},
-		AboutMe: {
-			type: 'json'
-		},
-		FacebookID: {
-			type: 'json'
-		},
-		WeChatID: {
+		location: {
 			type: 'string'
 		},
-		DeviceToken: {
+		hobbies: {
 			type: 'string'
 		},
-		Status: {
+		aboutMe: {
 			type: 'string'
 		},
-		PhotoURLs: {
+		facebookID: {
+			type: 'string'
+		},
+		weChatID: {
+			type: 'string'
+		},
+		deviceToken: {
+			type: 'string'
+		},
+		status: {
+			type: 'string'
+		},
+		photoURLs: {
 			type: 'json'
 		},
 		openfire_username: {
@@ -55,10 +61,10 @@ module.exports = {
 		openfire_password: {
 			type: 'string'
 		},
-		DeviceModel: {
+		deviceModel: {
 			type: 'string'
 		},
-		SettingID: {
+		settingID: {
 			type: 'string'
 		},
 		apiKey: {
