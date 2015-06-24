@@ -120,7 +120,7 @@ module.exports = {
 							var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:user}};
 							res.end(JSON.stringify(result));
 						} else {
-							var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
+							var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:err}};
 							res.end(JSON.stringify(result));
 						}
 					});
