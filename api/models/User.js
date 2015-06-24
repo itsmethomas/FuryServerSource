@@ -14,7 +14,6 @@ module.exports = {
 		},
 		email: {
 			type: 'email', // Email type will get validated by the ORM
-			required: true
 		},
 		password: {
 			type: 'string',
