@@ -12,8 +12,8 @@ module.exports = {
 
 		if (reqMethod == 'loginWithFacebook') {
 			UserService.loginWithFacebook(req.RequestParam, res);
-		} else if (reqMethod == 'loginWithWechat') {
-			UserService.loginWithWechat(req.RequestParam, res);
+		} else if (reqMethod == 'loginWithWeChat') {
+			UserService.loginWithWeChat(req.RequestParam, res);
 		} else if (reqMethod == 'registerWithEmail') {
 			UserService.registerWithEmail(req.RequestParam, res);
 		}
