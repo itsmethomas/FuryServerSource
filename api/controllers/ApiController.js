@@ -7,15 +7,100 @@
 
 module.exports = {
 	apiAction: function(req, res) {
-		req = req.body.FuryRequest;
-		var reqMethod = req.RequestMethod;
+		var param = req.body.FuryRequest;
+		var reqMethod = param.RequestMethod;
+
+		var protocol = req.connection.encrypted?'https':'http';
+		var baseUrl = protocol + '://' + req.headers.host + '/';
+
+		param.RequestParam.baseUrl = baseUrl;
+		param.RequestParam.status = 1;
 
 		if (reqMethod == 'loginWithFacebook') {
-			UserService.loginWithFacebook(req.RequestParam, res);
+			UserService.loginWithFacebook(param.RequestParam, res);
 		} else if (reqMethod == 'loginWithWeChat') {
-			UserService.loginWithWeChat(req.RequestParam, res);
+			UserService.loginWithWeChat(param.RequestParam, res);
 		} else if (reqMethod == 'registerWithEmail') {
-			UserService.registerWithEmail(req.RequestParam, res);
+			UserService.registerWithEmail(param.RequestParam, res);
+		} else if (reqMethod == 'loginWithEmail') {
+			UserService.loginWithEmail(param.RequestParam, res);
+		} else {
+			User.findOne({id:param.UserID}, function (err, user) {
+				if (err != null) {
+					var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
+					res.end(JSON.stringify(result));
+				} else if (user == null) {
+					var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
+					res.end(JSON.stringify(result));
+				} else {
+					if (user.apiKey != param.APIKey) {
+						var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Token does not mismatch.'}};
+						res.end(JSON.stringify(result));
+					}
+				}
+
+				if (reqMethod == 'saveUserSettings') {
+					UserService.saveSettings(param.RequestParam, user, res);
+				} else if (reqMethod == 'editUserPictures') {
+					UserService.editUserPictures(param.RequestParam, user, res);
+				} else if (reqMethod == 'editUserNameAndBirthday') {
+					user.deviceToken = param.RequestParam.deviceToken;
+					user.name = param.RequestParam.name;
+					user.birthday = param.RequestParam.birthday;
+
+					User.update({id:user.id}, user).exec(function (err, result){
+						var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:result}};
+						res.end(JSON.stringify(result));
+					});
+				} else if (reqMethod == 'editUserAboutMe') {
+					user.deviceToken = param.RequestParam.deviceToken;
+					user.aboutMe = param.RequestParam.aboutMe;
+					user.job = param.RequestParam.job;
+					user.height = param.RequestParam.height;
+					user.location = param.RequestParam.location;
+
+					User.update({id:user.id}, user).exec(function (err, result){
+						var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:result}};
+						res.end(JSON.stringify(result));
+					});
+				} else if (reqMethod == 'editUserHobbies') {
+					user.deviceToken = param.RequestParam.deviceToken;
+					user.hobbies = param.RequestParam.hobbies;
+
+					User.update({id:user.id}, user).exec(function (err, result){
+						var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:result}};
+						res.end(JSON.stringify(result));
+					});
+				} else if (reqMethod == 'logoutUser') {
+					user.deviceToken = param.RequestParam.deviceToken;
+					user.status = 0;
+					user.apiKey = "";
+
+					User.update({id:user.id}, user).exec(function (err, result){
+						var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:result}};
+						res.end(JSON.stringify(result));
+					});
+				} else if (reqMethod == 'deleteUser') {
+					user.deviceToken = param.RequestParam.deviceToken;
+					user.status = -1;
+					user.apiKey = "";
+
+					User.update({id:user.id}, user).exec(function (err, result){
+						var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:result}};
+						res.end(JSON.stringify(result));
+					});
+				} else if (reqMethod == 'fetchUserProfile') {
+					User.find({id:param.RequestParam.userID}, function (err, result){
+						var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:result}};
+						res.end(JSON.stringify(result));
+					});
+				} else if (reqMethod == 'fetchOfficialAccounts') {
+					User.find({}, function (err, result){
+						var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:result}};
+						res.end(JSON.stringify(result));
+					});
+				}
+			});
 		}
 	}
 };

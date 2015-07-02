@@ -34,7 +34,7 @@ module.exports = {
 			type: 'string'
 		},
 		hobbies: {
-			type: 'string'
+			type: 'json'
 		},
 		aboutMe: {
 			type: 'string'
@@ -51,7 +51,10 @@ module.exports = {
 		status: {
 			type: 'string'
 		},
-		photoURLs: {
+		photoUrls: {
+			type: 'json'
+		},
+		settings: {
 			type: 'json'
 		},
 		openfire_username: {

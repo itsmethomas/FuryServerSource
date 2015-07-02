@@ -72,6 +72,10 @@ module.exports = {
 			orgInfo.hobbies = [];
 		}
 
+		if (orgInfo.settings == null) {
+			orgInfo.settings = {showMe:2, lowerAgeLimit:18, upperAgeLimit:51, newApplication:1, chatMessage:1};
+		}
+
 		orgInfo.apiKey = UserService.randomizeString(40);
 
 		return orgInfo;
@@ -143,6 +147,25 @@ module.exports = {
 					res.end(JSON.stringify(result));
 				} else {
 					var userInfo = UserService.initUserInfo(param);
+
+					// Saving Photo...
+					if (userInfo.photo) {
+						var d = new Date();
+						var timestamp = d.getTime();
+						var photoname = 'photo_' + UserService.randomizeString(5) + '_' + timestamp + '.jpg';
+						require("fs").writeFile("./assets/photos/" + photoname, userInfo.photo, 'base64', function (err) {
+							console.log(err);
+						});
+
+						userInfo.photoUrls = [userInfo.baseUrl + "photos/" + photoname];
+					}
+
+					// Hash Password
+					if (userInfo.password) {
+						var crypto = require('crypto');
+						userInfo.password = crypto.createHash('md5').update(userInfo.password).digest('hex');
+					}
+
 					User.create(userInfo, function(err, user) {
 						if (err == null) {
 							var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:user}};
@@ -156,5 +179,70 @@ module.exports = {
 			}
 		});
 	},
+	
+	loginWithEmail: function (param, res) {
+		User.find({email:param.email}, function (err, users) {
+			if (err == null && users.length == 0) {
+				var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'User does not exist.'}};
+				res.end(JSON.stringify(result));
+			} else {
+				if (err != null) {
+					var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
+					res.end(JSON.stringify(result));
+				} else {
+					var userInfo = users[0];
+					var crypto = require('crypto');
+					var hashed_pwd = crypto.createHash('md5').update(param.password).digest('hex');
+
+					if (userInfo.password != hashed_pwd) {
+						var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:"Email and password doesn't match."}};
+						res.end(JSON.stringify(result));
+					} else {
+						userInfo.apiKey = UserService.randomizeString(40);
+						User.update({id:userInfo.id}, userInfo).exec(function (err, result){});
+
+						var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:user}};
+						res.end(JSON.stringify(result));
+					}
+				}
+			}
+		});
+	},
+
+	saveSettings: function (param, user, res) {
+		user.settings = {
+			showMe: param.showMe,
+			lowerAgeLimit: param.lowerAgeLimit,
+			upperAgeLimit: param.upperAgeLimit,
+			newApplication: param.newApplication,
+			chatMessage: param.chatMessage,
+		};
+		user.deviceToken = param.deviceToken;
+
+		User.update({id:user.id}, user).exec(function (err, result){
+			var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:user}};
+			res.end(JSON.stringify(result));
+		});
+	},
+
+	editUserPictures: function (param, user, res) {
+		user.deviceToken = param.deviceToken;
+		user.photoUrls = [];
+		for (i=0; i<param.photos.length; i++) {
+			var d = new Date();
+			var timestamp = d.getTime();
+			var photoname = 'photo_' + UserService.randomizeString(5) + '_' + timestamp + '.jpg';
+			require("fs").writeFile("./assets/photos/" + photoname, param.photos[i], 'base64', function (err) {
+				console.log(err);
+			});
+
+			user.photoUrls.push (param.baseUrl + "photos/" + photoname);
+		}
+
+		User.update({id:user.id}, user).exec(function (err, result){
+			var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:user}};
+			res.end(JSON.stringify(result));
+		});
+	}
 };
 
