@@ -84,7 +84,11 @@ module.exports = {
 	loginWithFacebook: function (param, res) {
 		User.find({facebookID:param.facebookID}, function (err, users) {
 			if (err == null && users.length > 0) {
-				var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:users[0]}};
+				var user = users[0];
+				user.apiKey = UserService.randomizeString(40);
+				User.update({id:user.id}, user).exec(function (err, result){});
+
+				var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:user}};
 				res.end(JSON.stringify(result));
 			} else {
 				if (err != null) {
@@ -114,7 +118,11 @@ module.exports = {
 			console.log(err);
 			console.log(users);
 			if (err == null && users.length > 0) {
-				var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:users[0]}};
+				var user = users[0];
+				user.apiKey = UserService.randomizeString(40);
+				User.update({id:user.id}, user).exec(function (err, result){});
+
+				var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:user}};
 				res.end(JSON.stringify(result));
 			} else {
 				if (err != null) {

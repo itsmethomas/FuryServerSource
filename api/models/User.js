@@ -72,5 +72,9 @@ module.exports = {
 		apiKey: {
 			type: 'string'
 		},
+		dinners: {
+            collection: 'dinner',
+            via: 'creatorID'
+		}
 	}
 };

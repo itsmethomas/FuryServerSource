@@ -34,7 +34,7 @@ module.exports = {
 					res.end(JSON.stringify(result));
 				} else {
 					if (user.apiKey != param.APIKey) {
-						var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Token does not mismatch.'}};
+						var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Token does not match.'}};
 						res.end(JSON.stringify(result));
 					}
 				}
@@ -90,15 +90,68 @@ module.exports = {
 						res.end(JSON.stringify(result));
 					});
 				} else if (reqMethod == 'fetchUserProfile') {
-					User.find({id:param.RequestParam.userID}, function (err, result){
-						var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:result}};
-						res.end(JSON.stringify(result));
+					User.findOne({id:param.RequestParam.userID}, function (err, user){
+						if (user == null) {
+							var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'User does not exist.'}};
+							res.end(JSON.stringify(result));
+						} else {
+							delete user.password;
+							delete user.apiKey;
+							delete user.openfire_password;
+
+							var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:user}};
+							res.end(JSON.stringify(result));
+						}
 					});
 				} else if (reqMethod == 'fetchOfficialAccounts') {
 					User.find({}, function (err, result){
-						var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:result}};
-						res.end(JSON.stringify(result));
+						if (err == null) {
+							for (i = 0; i < result.length; i++) {
+								var user = result[i];
+
+								delete user.password;
+								delete user.apiKey;
+								delete user.openfire_password;
+							}
+							var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:result}};
+							res.end(JSON.stringify(result));
+						} else {
+							var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error.'}};
+							res.end(JSON.stringify(result));
+						}
 					});
+				} else if (reqMethod == 'createDinner') {
+					DinnerService.createDinner(param.RequestParam, res);
+
+				} else if (reqMethod == 'fetchAllDinners') {
+					DinnerService.fetchAllDinners(param.RequestParam, res);
+
+				} else if (reqMethod == 'getDatesNearCurrentLocation') {
+					DinnerService.getDatesNearCurrentLocation(param.RequestParam, res);
+
+				} else if (reqMethod == 'getDinnersNearCurrentLocation') {
+					DinnerService.fetchAllDinners(param.RequestParam, res);
+
+				} else if (reqMethod == 'applyDinner') {
+					DinnerService.applyDinner(param.RequestParam, res);
+
+				} else if (reqMethod == 'quitDinner') {
+					DinnerService.quitDinner(param.RequestParam, res);
+
+				} else if (reqMethod == 'getDinnerWithID') {
+					DinnerService.getDinnerWithID(param.RequestParam, res);
+
+				} else if (reqMethod == 'cancelDinner') {
+					DinnerService.cancelDinner(param.RequestParam, res);
+
+				} else if (reqMethod == 'blockUser') {
+					BlockService.blockUser(param.RequestParam, res);
+
+				} else if (reqMethod == 'getBlockedUsers') {
+					BlockService.getBlockedUsers(param.RequestParam, res);
+
+				} else if (reqMethod == 'unBlockUser') {
+					BlockService.unBlockUser(param.RequestParam, res);
 				}
 			});
 		}
