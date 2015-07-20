@@ -24,7 +24,7 @@ module.exports = {
 
 		var http = require("http");
 
-		var pathComp = "/plugins/userService/userservice?type=add&secret=2W27gUNY&username="
+		var pathComp = "/plugins/userService/userservice?type=add&secret=T1N15RwD&username="
 					+ username + "&password=" + password + "&name=" + encodeURIComponent(name) + "&email=" + encodeURIComponent(email);
 		var ops = {
 		  host: '52.8.37.193',
