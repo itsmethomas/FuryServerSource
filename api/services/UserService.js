@@ -209,7 +209,7 @@ module.exports = {
 						userInfo.apiKey = UserService.randomizeString(40);
 						User.update({id:userInfo.id}, userInfo).exec(function (err, result){});
 
-						var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:user}};
+						var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:userInfo}};
 						res.end(JSON.stringify(result));
 					}
 				}
