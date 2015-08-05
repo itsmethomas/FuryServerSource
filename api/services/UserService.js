@@ -72,6 +72,10 @@ module.exports = {
 			orgInfo.hobbies = [];
 		}
 
+		if (orgInfo.email == null) {
+			orgInfo.email = '';
+		}
+
 		if (orgInfo.settings == null) {
 			orgInfo.settings = {showMe:2, lowerAgeLimit:18, upperAgeLimit:51, newApplication:1, chatMessage:1};
 		}
@@ -113,7 +117,6 @@ module.exports = {
 	},
 
 	loginWithWeChat: function (param, res) {
-		console.log(param);
 		User.find({weChatID:param.weChatID}, function (err, users) {
 			console.log(err);
 			console.log(users);
