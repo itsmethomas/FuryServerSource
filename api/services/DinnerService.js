@@ -8,7 +8,7 @@
 module.exports = {
 	createDinner: function (param, res) {
 		var dinnerInfo = {
-			creatorID: param.creatorID,
+			creator: param.creator,
 			type: param.type,
 			date: param.date,
 			geoLocation: param.geoLocation,
@@ -35,7 +35,7 @@ module.exports = {
 		});
 	},
 	fetchAllDinners: function (param, res) {
-		Dinner.find().populate('creatorID', {}).exec(function (err, rows) {
+		Dinner.find().populate('creator', {}).exec(function (err, rows) {
 			var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:rows}};
 			res.end(JSON.stringify(result));
 		});

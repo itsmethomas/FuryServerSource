@@ -7,7 +7,7 @@
 
 module.exports = {
 	attributes: {
-		creatorID: {
+		creator: {
 			model: 'User',
 		},
 		type: {
@@ -38,6 +38,9 @@ module.exports = {
 			type: 'string'
 		},
 		ageLowerLimit: {
+			type: 'string'
+		},
+		ageUpperLimit: {
 			type: 'string'
 		},
 		status: {
