@@ -52,7 +52,7 @@ module.exports = {
 				} else {
 					console.log(userInfo);
 					var candidateList = dinnerInfo.candidateList == '' ? [] : dinnerInfo.candidateList;
-					var candidateInfo = {id:userInfo.id, name:userInfo.name, picURL: (userInfo.photoUrls.length > 0 ? userInfo.photoUrls[0] : '')};
+					var candidateInfo = {id:userInfo.id, name:userInfo.name, picURL: (userInfo.photoUrls == null ? '' : (userInfo.photoUrls.length > 0 ? userInfo.photoUrls[0] : ''))};
 
 					candidateList.push(candidateInfo);
 					console.log(candidateList);

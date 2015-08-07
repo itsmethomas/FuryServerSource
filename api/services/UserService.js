@@ -80,6 +80,9 @@ module.exports = {
 			orgInfo.settings = {showMe:2, lowerAgeLimit:18, upperAgeLimit:51, newApplication:1, chatMessage:1};
 		}
 
+		if (orgInfo.photoUrls == null) {
+			orgInfo.photoUrls = [];
+		}
 		orgInfo.apiKey = UserService.randomizeString(40);
 
 		return orgInfo;
