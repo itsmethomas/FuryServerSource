@@ -89,13 +89,13 @@ module.exports = {
 		Dinner.find({creator:userInfo.id}, function (err, dinners) {
 			var createdDinnerList = [];
 			for (i=0; i<dinners.length; i++){
-				createdDinnerList[] = dinners[i].id;
+				createdDinnerList.push(dinners[i].id);
 			}
 			userInfo.createdDinnerList = createdDinnerList;
 			DinnerApply.find({applyUserId:userInfo.id}, function (err, dinners) {
 				var appliedDinnerList = [];
 				for (i=0; i<dinners.length; i++){
-					appliedDinnerList[] = dinners[i].dinnerId;
+					appliedDinnerList.push(dinners[i].dinnerId);
 				}
 				userInfo.appliedDinnerList = appliedDinnerList;
 				var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:userInfo}};
