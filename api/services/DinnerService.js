@@ -50,7 +50,7 @@ module.exports = {
 					var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
 					res.end(JSON.stringify(result));
 				} else {
-					console.log(dinnerInfo);
+					console.log(userInfo);
 					var candidateList = dinnerInfo.candidateList == '' ? [] : dinnerInfo.candidateList;
 					var candidateInfo = {id:userInfo.id, name:userInfo.name, picURL: (userInfo.photoUrls.length > 0 ? userInfo.photoUrls[0] : '')};
 
