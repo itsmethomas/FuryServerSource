@@ -85,6 +85,25 @@ module.exports = {
 		return orgInfo;
 	},
 
+	setDinnerInfo: function (userInfo, res) {
+		Dinner.find({creator:userInfo.id}, function (err, dinners) {
+			var createdDinnerList = [];
+			for (i=0; i<dinners.length; i++){
+				createdDinnerList[] = dinners[i].id;
+			}
+			userInfo.createdDinnerList = createdDinnerList;
+			DinnerApply.find({applyUserId:userInfo.id}, function (err, dinners) {
+				var appliedDinnerList = [];
+				for (i=0; i<dinners.length; i++){
+					appliedDinnerList[] = dinners[i].dinnerId;
+				}
+				userInfo.appliedDinnerList = appliedDinnerList;
+				var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:userInfo}};
+				res.end(JSON.stringify(result));
+			});
+		});
+	}
+
 	loginWithFacebook: function (param, res) {
 		User.find({facebookID:param.facebookID}, function (err, users) {
 			if (err == null && users.length > 0) {
@@ -92,8 +111,7 @@ module.exports = {
 				user.apiKey = UserService.randomizeString(40);
 				User.update({id:user.id}, user).exec(function (err, result){});
 
-				var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:user}};
-				res.end(JSON.stringify(result));
+				UserService.setDinnerInfo(user, res);
 			} else {
 				if (err != null) {
 					var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
@@ -103,6 +121,8 @@ module.exports = {
 
 					User.create(userInfo, function(err, user) {
 						if (err == null) {
+							user.createdDinnerList = [];
+							user.appliedDinnerList = [];
 							var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:user}};
 							res.end(JSON.stringify(result));
 						} else {
@@ -125,8 +145,7 @@ module.exports = {
 				user.apiKey = UserService.randomizeString(40);
 				User.update({id:user.id}, user).exec(function (err, result){});
 
-				var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:user}};
-				res.end(JSON.stringify(result));
+				UserService.setDinnerInfo(user, res);
 			} else {
 				if (err != null) {
 					var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:err}};
@@ -135,6 +154,8 @@ module.exports = {
 					var userInfo = UserService.initUserInfo(param);
 					User.create(userInfo, function(err, user) {
 						if (err == null) {
+							user.createdDinnerList = [];
+							user.appliedDinnerList = [];
 							var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:user}};
 							res.end(JSON.stringify(result));
 						} else {
@@ -179,6 +200,8 @@ module.exports = {
 
 					User.create(userInfo, function(err, user) {
 						if (err == null) {
+							user.createdDinnerList = [];
+							user.appliedDinnerList = [];
 							var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:user}};
 							res.end(JSON.stringify(result));
 						} else {
@@ -212,8 +235,7 @@ module.exports = {
 						userInfo.apiKey = UserService.randomizeString(40);
 						User.update({id:userInfo.id}, userInfo).exec(function (err, result){});
 
-						var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:userInfo}};
-						res.end(JSON.stringify(result));
+						UserService.setDinnerInfo(user, res);
 					}
 				}
 			}

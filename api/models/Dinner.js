@@ -8,7 +8,7 @@
 module.exports = {
 	attributes: {
 		creator: {
-			model: 'User',
+			type: 'string',
 		},
 		type: {
 			type: 'string'

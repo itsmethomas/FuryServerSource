@@ -58,6 +58,7 @@ module.exports = {
 					console.log(candidateList);
 					dinnerInfo.candidateList = candidateList;
 					Dinner.update({id:dinnerID}, dinnerInfo).exec(function (err, result){});
+					DinnerApply.create({dinnerId:dinnerID, applyUserId:userID}, function (err, dinner) {});
 
 					var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:dinnerInfo}};
 					res.end(JSON.stringify(result));
@@ -98,8 +99,20 @@ module.exports = {
 				var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
 				res.end(JSON.stringify(result));
 			} else {
-				var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:dinnerInfo}};
-				res.end(JSON.stringify(result));
+				User.findOne({id:dinnerInfo.creator}, function (err, creatorInfo) {
+					if (err) {
+						var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
+						res.end(JSON.stringify(result));
+					} else {
+						delete creatorInfo.password;
+						delete creatorInfo.apiKey;
+						delete creatorInfo.openfire_password;
+
+						dinnerInfo.creator = creatorInfo;
+						var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:dinnerInfo}};
+						res.end(JSON.stringify(result));
+					}
+				});
 			}
 		});
 	},
