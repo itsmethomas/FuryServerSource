@@ -35,7 +35,7 @@ module.exports = {
 		});
 	},
 	fetchAllDinners: function (param, res) {
-		Dinner.find().populate('creator', {}).exec(function (err, rows) {
+		Dinner.find({}, function (err, rows) {
 			var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:rows}};
 			res.end(JSON.stringify(result));
 		});
@@ -104,11 +104,15 @@ module.exports = {
 						var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
 						res.end(JSON.stringify(result));
 					} else {
-						delete creatorInfo.password;
-						delete creatorInfo.apiKey;
-						delete creatorInfo.openfire_password;
+						if (creatorInfo == null) {
+							dinnerInfo.creator = {};
+						} else {
+							delete creatorInfo.password;
+							delete creatorInfo.apiKey;
+							delete creatorInfo.openfire_password;
 
-						dinnerInfo.creator = creatorInfo;
+							dinnerInfo.creator = creatorInfo;
+						}
 						var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:dinnerInfo}};
 						res.end(JSON.stringify(result));
 					}
