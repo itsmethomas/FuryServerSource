@@ -94,6 +94,7 @@ module.exports = {
 		var dinnerID = param.dinnerID;
 		var userID = param.id;
 
+		console.log(dinnerID);
 		Dinner.findOne({id:dinnerID}, function (err, dinnerInfo) {
 			if (err) {
 				var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
