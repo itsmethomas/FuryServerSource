@@ -238,7 +238,7 @@ module.exports = {
 						userInfo.apiKey = UserService.randomizeString(40);
 						User.update({id:userInfo.id}, userInfo).exec(function (err, result){});
 
-						UserService.setDinnerInfo(user, res);
+						UserService.setDinnerInfo(userInfo, res);
 					}
 				}
 			}
