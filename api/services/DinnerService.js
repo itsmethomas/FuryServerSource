@@ -100,7 +100,7 @@ module.exports = {
 				res.end(JSON.stringify(result));
 			} else {
 				console.log(dinnerInfo);
-				User.findOne({id:dinnerInfo.creator}, function (err, creatorInfo) {
+				/*User.findOne({id:dinnerInfo.creator}, function (err, creatorInfo) {
 					if (err) {
 						var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
 						res.end(JSON.stringify(result));
@@ -117,7 +117,7 @@ module.exports = {
 						var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:dinnerInfo}};
 						res.end(JSON.stringify(result));
 					}
-				});
+				});*/
 			}
 		});
 	},
