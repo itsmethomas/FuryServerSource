@@ -130,7 +130,7 @@ module.exports = {
 					DinnerService.getDatesNearCurrentLocation(param.RequestParam, res);
 
 				} else if (reqMethod == 'getDinnersNearCurrentLocation') {
-					DinnerService.fetchAllDinners(param.RequestParam, res);
+					DinnerService.getDinnersNearCurrentLocation(param.RequestParam, res);
 
 				} else if (reqMethod == 'applyDinner') {
 					DinnerService.applyDinner(param.RequestParam, res);

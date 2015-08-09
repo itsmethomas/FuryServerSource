@@ -143,7 +143,7 @@ module.exports = {
 		var dinnerID = param.dinnerID;
 		var userID = param.id;
 
-		Dinner.find({type:0}, function (err, rows) {
+		Dinner.find({type:1}, function (err, rows) {
 			if (err) {
 				var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
 				res.end(JSON.stringify(result));
@@ -157,7 +157,7 @@ module.exports = {
 		var dinnerID = param.dinnerID;
 		var userID = param.id;
 
-		Dinner.find({type:1}, function (err, rows) {
+		Dinner.find({type:0}, function (err, rows) {
 			if (err) {
 				var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
 				res.end(JSON.stringify(result));
