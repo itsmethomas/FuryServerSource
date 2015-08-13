@@ -8,7 +8,7 @@
 module.exports = {
 	createDinner: function (param, res) {
 		var dinnerInfo = {
-			creator: param.creator,
+			creatorID: param.creatorID,
 			type: param.type,
 			date: param.date,
 			geoLocation: param.geoLocation,
@@ -101,7 +101,7 @@ module.exports = {
 				res.end(JSON.stringify(result));
 			} else {
 				console.log(dinnerInfo);
-				User.findOne({id:dinnerInfo.creator}, function (err, creatorInfo) {
+				User.findOne({id:dinnerInfo.creatorID}, function (err, creatorInfo) {
 					if (err) {
 						var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
 						res.end(JSON.stringify(result));
@@ -163,6 +163,38 @@ module.exports = {
 				res.end(JSON.stringify(result));
 			} else {
 				var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:rows}};
+				res.end(JSON.stringify(result));
+			}
+		});
+	},
+	getDinnersIApplied: function (param, res) {
+		var userId = param.id;
+		DinnerApply.find({applyUserId:userId}, function (err, rows) {
+			var dinnerIds = [];
+			for (i = 0; i<rows.length; i++) {
+				var item = rows[i];
+				dinnerIds.push(item.dinnerId);
+			}
+
+			Dinner.find({id: {$in:dinnerIds}}, function (err, dinners) {
+				if (err) {
+					var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
+					res.end(JSON.stringify(result));
+				} else {
+					var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:dinners}};
+					res.end(JSON.stringify(result));
+				}
+			});
+		});
+	},
+	getDinnersICreated: function (param, res) {
+		var userId = param.id;
+		Dinner.find({creatorID: userId}, function (err, dinners) {
+			if (err) {
+				var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
+				res.end(JSON.stringify(result));
+			} else {
+				var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:dinners}};
 				res.end(JSON.stringify(result));
 			}
 		});

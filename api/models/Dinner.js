@@ -7,7 +7,7 @@
 
 module.exports = {
 	attributes: {
-		creator: {
+		creatorID: {
 			type: 'string',
 		},
 		type: {

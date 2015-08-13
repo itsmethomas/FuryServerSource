@@ -23,8 +23,21 @@ module.exports = {
 	},
 	getBlockedUsers: function (param, res) {
 		Block.find({}, function (err, rows) {
-			var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:rows}};
-			res.end(JSON.stringify(result));
+			var userIds = [];
+			for (i = 0; i<rows.length; i++) {
+				var item = rows[i];
+				userIds.push(item.blockedUserId);
+			}
+
+			User.find({id: {$in:userIds}}, function (err, users) {
+				if (err) {
+					var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
+					res.end(JSON.stringify(result));
+				} else {
+					var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:users}};
+					res.end(JSON.stringify(result));
+				}
+			});
 		});
 	},
 	unBlockUser: function (param, res) {

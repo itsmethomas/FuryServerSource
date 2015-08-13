@@ -24,6 +24,21 @@ module.exports = {
 			UserService.registerWithEmail(param.RequestParam, res);
 		} else if (reqMethod == 'loginWithEmail') {
 			UserService.loginWithEmail(param.RequestParam, res);
+		} else if (reqMethod == 'checkVersion') {
+			AppVersion.findOne({}, function (err, version) {
+				if (version == null) {
+					AppVersion.create({
+						minVersion: "1.0",
+						remVersion: "1.0",
+						maxVersion: "1.0"
+					}, function (err, version) {
+						res.end(JSON.stringify(version));
+					});
+				} else {
+					res.end(JSON.stringify(version));
+				}
+			});
+
 		} else {
 			User.findOne({id:param.UserID}, function (err, user) {
 				if (err != null) {
@@ -143,6 +158,12 @@ module.exports = {
 
 				} else if (reqMethod == 'cancelDinner') {
 					DinnerService.cancelDinner(param.RequestParam, res);
+
+				} else if (reqMethod == 'getDinnersICreated') {
+					DinnerService.getDinnersICreated(param.RequestParam, res);
+
+				} else if (reqMethod == 'getDinnersIApplied') {
+					DinnerService.getDinnersIApplied(param.RequestParam, res);
 
 				} else if (reqMethod == 'blockUser') {
 					BlockService.blockUser(param.RequestParam, res);
