@@ -78,7 +78,7 @@ module.exports = {
 		agent = module.exports = new apnagent.Agent();
 
 		var join = require('path').join;
-		var pfx = join(__dirname, '../../certs/aps_pro.p12');
+		var pfx = join(__dirname, '../../certs/aps_dev.p12');
 
 		agent.set('pfx file', pfx);
 		agent.enable('sandbox');
