@@ -131,7 +131,7 @@ module.exports = {
 					user.apiKey = "";
 
 					User.update({id:user.id}, user).exec(function (err, result){
-						var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:result}};
+						var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:result[0]}};
 						res.end(JSON.stringify(result));
 					});
 				} else if (reqMethod == 'fetchUserProfile') {

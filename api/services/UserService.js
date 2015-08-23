@@ -129,6 +129,20 @@ module.exports = {
 							user.appliedDinnerList = [];
 							var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:user}};
 							res.end(JSON.stringify(result));
+
+							OpenfireUser.create({
+								UserID:user.id,
+								DeviceToken:user.deviceToken,
+								UserName:user.name,
+								openfire_username:user.openfire_username,
+								Status:'1'
+							}, function (err, result) {
+							});
+							OpenfireSettings.create({
+								UserID:user.id,
+								NoChatMessage:'1'
+							}, function (err, result) {
+							});
 						} else {
 							console.log(err);
 							var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
@@ -163,6 +177,21 @@ module.exports = {
 							user.appliedDinnerList = [];
 							var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:user}};
 							res.end(JSON.stringify(result));
+
+
+							OpenfireUser.create({
+								UserID:user.id,
+								DeviceToken:user.deviceToken,
+								UserName:user.name,
+								openfire_username:user.openfire_username,
+								Status:'1'
+							}, function (err, result) {
+							});
+							OpenfireSettings.create({
+								UserID:user.id,
+								NoChatMessage:'1'
+							}, function (err, result) {
+							});
 						} else {
 							var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:err}};
 							res.end(JSON.stringify(result));
@@ -209,6 +238,21 @@ module.exports = {
 							user.appliedDinnerList = [];
 							var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:user}};
 							res.end(JSON.stringify(result));
+
+
+							OpenfireUser.create({
+								UserID:user.id,
+								DeviceToken:user.deviceToken,
+								UserName:user.name,
+								openfire_username:user.openfire_username,
+								Status:'1'
+							}, function (err, result) {
+							});
+							OpenfireSettings.create({
+								UserID:user.id,
+								NoChatMessage:'1'
+							}, function (err, result) {
+							});
 						} else {
 							var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
 							res.end(JSON.stringify(result));
@@ -248,6 +292,7 @@ module.exports = {
 	},
 
 	saveSettings: function (param, user, res) {
+		console.log(user);
 		user.settings = {
 			showMe: param.showMe,
 			lowerAgeLimit: param.lowerAgeLimit,
