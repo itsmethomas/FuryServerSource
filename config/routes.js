@@ -49,9 +49,5 @@ module.exports.routes = {
   'post /api': {
     controller    : 'Api',
     action        : 'apiAction'
-  },
-  'post /api': {
-    controller    : 'Api',
-    action        : 'emailTest'
-  },
+  }
  };

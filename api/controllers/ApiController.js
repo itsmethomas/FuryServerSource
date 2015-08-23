@@ -60,9 +60,11 @@ module.exports = {
 						remVersion: "1.0",
 						maxVersion: "1.0"
 					}, function (err, version) {
+						var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:version}};
 						res.end(JSON.stringify(version));
 					});
 				} else {
+					var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:version}};
 					res.end(JSON.stringify(version));
 				}
 			});
