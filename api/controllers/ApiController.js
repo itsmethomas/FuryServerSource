@@ -105,7 +105,7 @@ module.exports = {
 					user.location = param.RequestParam.location;
 
 					User.update({id:user.id}, user).exec(function (err, result){
-						var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:result}};
+						var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:result[0]}};
 						res.end(JSON.stringify(result));
 					});
 				} else if (reqMethod == 'editUserHobbies') {
@@ -113,7 +113,7 @@ module.exports = {
 					user.hobbies = param.RequestParam.hobbies;
 
 					User.update({id:user.id}, user).exec(function (err, result){
-						var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:result}};
+						var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:result[0]}};
 						res.end(JSON.stringify(result));
 					});
 				} else if (reqMethod == 'logoutUser') {
