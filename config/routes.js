@@ -50,4 +50,8 @@ module.exports.routes = {
     controller    : 'Api',
     action        : 'apiAction'
   },
+  'post /api': {
+    controller    : 'Api',
+    action        : 'emailTest'
+  },
  };

@@ -6,6 +6,34 @@
  */
 
 module.exports = {
+	emailTest: function (req, res) {
+		var nodemailer = require('nodemailer');
+		var smtpTransport = require('nodemailer-smtp-transport');
+		var transport = nodemailer.createTransport(smtpTransport({
+		  host: '52.8.37.193',
+		  port: 587,
+		  auth: {
+		    user: 'ubuntu',
+		    pass: '123'
+		  }
+		}));
+
+		transport.sendMail({
+			from: 'taeyong325@hotmail.com',
+			to: 'itsmethomas1225@hotmail.com',
+			subject: 'Please confirm your e-mail address',
+			html: 'adsfasdfasfasd',
+			text: 'asdasdfasdf'
+		}, function(err, responseStatus) {
+			if (err) {
+				console.log(err);
+			} else {
+				console.log(responseStatus.message);
+			}
+        });
+
+        res.end('aa');
+	},
 	apiAction: function(req, res) {
 		var param = req.body.FuryRequest;
 		var reqMethod = param.RequestMethod;

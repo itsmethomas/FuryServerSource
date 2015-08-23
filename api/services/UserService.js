@@ -112,6 +112,7 @@ module.exports = {
 			if (err == null && users.length > 0) {
 				var user = users[0];
 				user.apiKey = UserService.randomizeString(40);
+				user.photoUrls = param.photoUrls;
 				User.update({id:user.id}, user).exec(function (err, result){});
 
 				UserService.setDinnerInfo(user, res);
@@ -146,6 +147,7 @@ module.exports = {
 			if (err == null && users.length > 0) {
 				var user = users[0];
 				user.apiKey = UserService.randomizeString(40);
+				user.photoUrls = param.photoUrls;
 				User.update({id:user.id}, user).exec(function (err, result){});
 
 				UserService.setDinnerInfo(user, res);
