@@ -303,7 +303,7 @@ module.exports = {
 		user.deviceToken = param.deviceToken;
 
 		User.update({id:user.id}, user).exec(function (err, result){
-			var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:user}};
+			var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:user.settings}};
 			res.end(JSON.stringify(result));
 		});
 	},
