@@ -72,5 +72,23 @@ module.exports = {
 		apiKey: {
 			type: 'string'
 		}
-	}
+	},
+	sendPush: function (deviceToken, msg) {
+		var apnagent = require('apnagent');
+		agent = module.exports = new apnagent.Agent();
+
+		var join = require('path').join;
+		var pfx = join(__dirname, '../../certs/aps_pro.p12');
+
+		agent.set('pfx file', pfx);
+		// agent.enable('sandbox');
+
+		agent.connect(function (err) {
+		});
+
+		console.log(deviceToken);
+		console.log(msg);
+
+		agent.createMessage().device(deviceToken).alert(msg).send();
+	},
 };

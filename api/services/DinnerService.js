@@ -63,7 +63,17 @@ module.exports = {
 					var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:dinnerInfo}};
 					res.end(JSON.stringify(result));
 				}
+
+				// send APNS
+				User.findOne({id:dinnerInfo.creatorID}, function (err, creatorInfo) {
+					if (creatorInfo != null) {
+						var msg = userInfo.name + " applied your dinner.";
+						User.sendPush(creatorInfo.deviceToken, msg);
+					}
+				});
 			});
+
+
 		});
 	},
 	quitDinner: function (param, res) {

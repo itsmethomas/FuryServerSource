@@ -53,6 +53,7 @@ module.exports = {
 		} else if (reqMethod == 'loginWithEmail') {
 			UserService.loginWithEmail(param.RequestParam, res);
 		} else if (reqMethod == 'checkVersion') {
+			User.sendPush('0EFDE84DBDEC074A37B12B6AD471346A32FC989092B96191D90D3A30DF9279E3', 'sample push');
 			AppVersion.findOne({}, function (err, version) {
 				if (version == null) {
 					AppVersion.create({
