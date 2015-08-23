@@ -38,7 +38,7 @@ module.exports.connections = {
     adapter : 'sails-mysql',
     host    : 'localhost',
     user    : 'root',
-    password: '', 
+    password: 'rootroot', 
     database: 'openfire_db'
   },
 
