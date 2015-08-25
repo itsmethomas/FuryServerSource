@@ -29,7 +29,7 @@ module.exports = {
 				var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
 				res.end(JSON.stringify(result));
 			} else {
-				var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:{dinnerID:dinner.id}}};
+				var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:dinner}};
 				res.end(JSON.stringify(result));
 			}
 		});
@@ -44,36 +44,44 @@ module.exports = {
 		var dinnerID = param.dinnerID;
 		var userID = param.id;
 
-		Dinner.findOne({id:dinnerID}, function (err1, dinnerInfo) {
-			User.findOne({id:userID}, function (err2, userInfo) {
-				if (err1 || err2) {
-					var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
-					res.end(JSON.stringify(result));
-				} else {
-					console.log(userInfo);
-					var candidateList = dinnerInfo.candidateList == '' ? [] : dinnerInfo.candidateList;
-					var candidateInfo = {id:userInfo.id, name:userInfo.name, picURL: (userInfo.photoUrls == null ? '' : (userInfo.photoUrls.length > 0 ? userInfo.photoUrls[0] : ''))};
+		DinnerApply.find({dinnerId:dinnerID, applyUserId:userID}, function (err, result) {
+			if (err != null) {
+				var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
+				res.end(JSON.stringify(result));
+			} else if (result.length > 0) {
+				var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'You already applied to this dinner.'}};
+				res.end(JSON.stringify(result));
+			} else {
+				Dinner.findOne({id:dinnerID}, function (err1, dinnerInfo) {
+					User.findOne({id:userID}, function (err2, userInfo) {
+						if (err1 || err2) {
+							var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
+							res.end(JSON.stringify(result));
+						} else {
+							console.log(userInfo);
+							var candidateList = dinnerInfo.candidateList == '' ? [] : dinnerInfo.candidateList;
+							var candidateInfo = {id:userInfo.id, name:userInfo.name, picURL: (userInfo.photoUrls == null ? '' : (userInfo.photoUrls.length > 0 ? userInfo.photoUrls[0] : ''))};
 
-					candidateList.push(candidateInfo);
-					console.log(candidateList);
-					dinnerInfo.candidateList = candidateList;
-					Dinner.update({id:dinnerID}, dinnerInfo).exec(function (err, result){});
-					DinnerApply.create({dinnerId:dinnerID, applyUserId:userID}, function (err, dinner) {});
+							candidateList.push(candidateInfo);
+							console.log(candidateList);
+							dinnerInfo.candidateList = candidateList;
+							Dinner.update({id:dinnerID}, dinnerInfo).exec(function (err, result){});
+							DinnerApply.create({dinnerId:dinnerID, applyUserId:userID}, function (err, dinner) {});
 
-					var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:dinnerInfo}};
-					res.end(JSON.stringify(result));
-				}
+							var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:dinnerInfo}};
+							res.end(JSON.stringify(result));
+						}
 
-				// send APNS
-				User.findOne({id:dinnerInfo.creatorID}, function (err, creatorInfo) {
-					if (creatorInfo != null) {
-						var msg = userInfo.name + " applied your dinner.";
-						User.sendPush(creatorInfo.deviceToken, msg);
-					}
+						// send APNS
+						User.findOne({id:dinnerInfo.creatorID}, function (err, creatorInfo) {
+							if (creatorInfo != null) {
+								var msg = userInfo.name + " applied your dinner.";
+								User.sendPush(creatorInfo.deviceToken, msg);
+							}
+						});
+					});
 				});
-			});
-
-
+			}
 		});
 	},
 	quitDinner: function (param, res) {
@@ -152,8 +160,24 @@ module.exports = {
 	getDatesNearCurrentLocation: function (param, res) {
 		var dinnerID = param.dinnerID;
 		var userID = param.id;
+		var location = param.geoLocation;
 
-		Dinner.find({type:1}, function (err, rows) {
+		var condition = {
+			location:{
+				$geoWithin:{
+					$centerSphere:[
+						[
+							location[0],
+							location[1]
+						],
+						10000 // 100 mile
+					]
+				}
+			},
+			type: 1
+		}
+
+		Dinner.find(condition, function (err, rows) {
 			if (err) {
 				var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
 				res.end(JSON.stringify(result));
@@ -166,8 +190,24 @@ module.exports = {
 	getDinnersNearCurrentLocation: function (param, res) {
 		var dinnerID = param.dinnerID;
 		var userID = param.id;
+		var location = param.geoLocation;
 
-		Dinner.find({type:0}, function (err, rows) {
+		var condition = {
+			location:{
+				$geoWithin:{
+					$centerSphere:[
+						[
+							location[0],
+							location[1]
+						],
+						10000 // 100 mile
+					]
+				}
+			},
+			type: 0
+		}
+
+		Dinner.find(condition, function (err, rows) {
 			if (err) {
 				var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
 				res.end(JSON.stringify(result));

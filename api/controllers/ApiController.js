@@ -8,15 +8,23 @@
 module.exports = {
 	emailTest: function (req, res) {
 		var nodemailer = require('nodemailer');
-		var smtpTransport = require('nodemailer-smtp-transport');
-		var transport = nodemailer.createTransport(smtpTransport({
-		  host: '52.8.37.193',
-		  port: 587,
-		  auth: {
-		    user: 'ubuntu',
-		    pass: '123'
-		  }
-		}));
+		// var smtpTransport = require('nodemailer-smtp-transport');
+		// var transport = nodemailer.createTransport(smtpTransport({
+		//   host: '52.8.37.193',
+		//   port: 587,
+		//   auth: {
+		//     user: 'ubuntu',
+		//     pass: '123'
+		//   }
+		// }));
+
+		var transporter = nodemailer.createTransport({
+		    service: 'Gmail',
+		    auth: {
+		        user: 'no-reply@mandoo.com.hk',
+		        pass: 'mandoo1234'
+		    }
+		});
 
 		transport.sendMail({
 			from: 'taeyong325@hotmail.com',
@@ -52,6 +60,8 @@ module.exports = {
 			UserService.registerWithEmail(param.RequestParam, res);
 		} else if (reqMethod == 'loginWithEmail') {
 			UserService.loginWithEmail(param.RequestParam, res);
+		} else if (reqMethod == 'recoverPassword') {
+			UserService.recoverPassword(param.RequestParam, res);
 		} else if (reqMethod == 'checkVersion') {
 			User.sendPush('0EFDE84DBDEC074A37B12B6AD471346A32FC989092B96191D90D3A30DF9279E3', 'sample push');
 			AppVersion.findOne({}, function (err, version) {

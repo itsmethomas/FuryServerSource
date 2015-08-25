@@ -178,7 +178,6 @@ module.exports = {
 							var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:user}};
 							res.end(JSON.stringify(result));
 
-
 							OpenfireUser.create({
 								UserID:user.id,
 								DeviceToken:user.deviceToken,
@@ -326,6 +325,82 @@ module.exports = {
 			var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:user}};
 			res.end(JSON.stringify(result));
 		});
+	},
+
+	recoverPassword: function (param, res) {
+		console.log(param);
+		var email = param.email;
+		User.find({email:email}, function (err, users) {
+			if (err != null) {
+				var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:"Internal Server Error."}};
+				res.end(JSON.stringify(result));
+			} else {
+				var correctUser = null;
+				for (var i=0; i<users.length; i++) {
+					if ((users[i].facebookID == null || users[i].facebookID == '') && (users[i].facebookID == null || users[i].facebookID == '')) {
+						correctUser = users[i];
+						break;
+					}
+				}
+
+				if (correctUser == null) {
+					var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:"No user exist."}};
+					res.end(JSON.stringify(result));
+				} else {
+					correctUser.recoverToken = UserService.randomizeString(40);
+					User.update({id:correctUser.id}, correctUser).exec(function (err, result) {
+						// Sending Email
+						var pwdRestLink = param.baseUrl + "resetPassword?token=" + correctUser.recoverToken;
+						UserService.sendResetEmail(correctUser, pwdRestLink);
+
+						var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:pwdRestLink}};//"Password recovery email is sent."}};
+						res.end(JSON.stringify(result));
+					});
+				}
+			}
+		});
+	},
+	sendResetEmail: function (userInfo, link) {
+		require("fs").readFile("./assets/templates/mail_template.ejb", 'utf-8', function (err, emailcontents) {
+			console.log(err);
+
+			emailcontents = emailcontents.replace('USER_NAME', userInfo.name);
+			emailcontents = emailcontents.replace('RESET_LINK', link);
+
+			console.log(link);
+
+			var nodemailer = require('nodemailer');
+			// var smtpTransport = require('nodemailer-smtp-transport');
+			// var transport = nodemailer.createTransport(smtpTransport({
+			//   host: '52.8.37.193',
+			//   port: 587,
+			//   auth: {
+			//     user: 'ubuntu',
+			//     pass: '123'
+			//   }
+			// }));
+
+			var transport = nodemailer.createTransport({
+			    service: 'Gmail',
+			    auth: {
+			        user: 'no-reply@mandoo.com.hk',
+			        pass: 'mandoo1234'
+			    }
+			});
+
+			transport.sendMail({
+				from: 'Mandoo',
+				to: userInfo.email,
+				subject: 'Forgot Password?',
+				html: emailcontents
+			}, function(err, responseStatus) {
+				if (err) {
+					console.log(err);
+				} else {
+					console.log(responseStatus.message);
+				}
+	        });
+        });
 	}
 };
 

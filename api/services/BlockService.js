@@ -34,6 +34,13 @@ module.exports = {
 					var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
 					res.end(JSON.stringify(result));
 				} else {
+					for (var i=0; i<users.length; i++) {
+						var user = users[i];
+						delete user.password;
+						delete user.apiKey;
+						delete user.openfire_username;
+						delete user.openfire_password;
+					}
 					var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:users}};
 					res.end(JSON.stringify(result));
 				}

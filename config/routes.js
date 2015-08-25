@@ -49,5 +49,14 @@ module.exports.routes = {
   'post /api': {
     controller    : 'Api',
     action        : 'apiAction'
+  },
+  'get /resetPassword': {
+    controller    : 'User',
+    action        : 'resetPassword'
+  },
+  'post /savePassword': {
+    controller    : 'User',
+    action        : 'savePassword',
+    view          : 'recover_done.ejs'
   }
  };

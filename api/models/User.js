@@ -71,6 +71,9 @@ module.exports = {
 		},
 		apiKey: {
 			type: 'string'
+		},
+		recoverToken: {
+			type: 'string'
 		}
 	},
 	sendPush: function (deviceToken, msg) {

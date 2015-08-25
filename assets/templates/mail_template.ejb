@@ -1,0 +1,92 @@
+<html>
+<head>
+<link rel='stylesheet' id='custom-google-fonts-css'  href='http://fonts.googleapis.com/css?family=Roboto%3A100%2C200%2C300%2C400%2C500%2C600%2C700%2C800&#038;subset=latin%2Ccyrillic-ext%2Ccyrillic%2Cgreek-ext%2Cvietnamese%2Clatin-ext&#038;ver=1.0' type='text/css' media='all' />
+<style>
+body {
+	background: #eeeeee;
+	text-align:center;
+}
+
+.main_div {
+	padding-top:20px;
+	padding-bottom:20px;
+	text-align:left;
+	display:block;
+	background:white;
+	width: 600px;
+	margin: auto;
+	font-family: "Roboto", "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	color: #666666;
+}
+
+.paragraph {
+	margin-left:20px;
+	margin-right:20px;
+}
+
+.logo {
+	margin-left:20px;
+	width:80px;
+	vertical-align: middle;
+	font-family: "Roboto", "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	color: #aaaaaa;
+	text-align: center;
+}
+.logo image {
+	display:block;
+}
+
+.border {
+	width: 100%;
+	display: block;
+}
+.leftborder {
+	border-bottom:3px solid #37a4d0;
+	width:50%;
+	float:left;
+}
+
+.rightborder {
+	border-bottom:3px solid #e77043;
+	width:50%;
+	float:right;
+}
+
+</style>
+</head>
+<body width="100%">
+<div class="main_div">
+	<div class="logo">
+	<image src="http://icebreaknow.com/assets/images/logo/logo.png" width="40"/>
+	ice<b>break</b>
+	</div>
+	<hr/>
+
+	<div class="paragraph">
+    <h2>Hi USER_NAME,</h2>
+	<h3>Did you forget your Dinnery password?</h3>
+	<br/>
+	<p>We’ve received a request to recover your password for your Ice Break account, </p>
+	<p>here it is:</p>
+
+	<h3><a href="RESET_LINK">Reset your password.</a></h3>
+	<p>Don’t forget to keep it secure!</p>
+	</p>
+	</div>
+
+	<br/>
+	<br/>
+	<div class="border">
+		<span class="leftborder">&nbsp;</span>
+		<span class="rightborder">&nbsp;</span>
+	</div>
+	<div class="paragraph">
+	<br/>
+	<p>
+	This is an automatic email, please don’t answer to this email address.
+	Dinnery, Inc. 1355 Market St., Suite 900 San Francisco, CA 94103
+	</p>
+	</div>
+</div>
+</body>
+</html>
