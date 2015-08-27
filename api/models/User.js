@@ -6,6 +6,9 @@
 */
 
 module.exports = {
+	LANGUAGE_EN: 'en',
+	LANGUAGE_CHINESE_TRADITIONAL: 'zh_hant',
+	LANGUAGE_CHINESE_SIMPLIFIED: 'zh_hans',
 		
 	attributes: {
 		name: {
@@ -73,6 +76,9 @@ module.exports = {
 			type: 'string'
 		},
 		recoverToken: {
+			type: 'string'
+		},
+		language: {
 			type: 'string'
 		}
 	},

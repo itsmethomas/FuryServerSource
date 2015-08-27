@@ -75,7 +75,14 @@ module.exports = {
 						// send APNS
 						User.findOne({id:dinnerInfo.creatorID}, function (err, creatorInfo) {
 							if (creatorInfo != null) {
-								var msg = userInfo.name + " applied your dinner.";
+								var msg = userInfo.name;
+								if (creatorInfo.language == User.LANGUAGE_CHINESE_TRADITIONAL) {
+									msg += " 剛剛申請了您的約飯";
+								} else if (creatorInfo.language == User.LANGUAGE_CHINESE_SIMPLIFIED) {
+									msg += " 刚刚申请了你的约饭";
+								} else {
+									msg += " just applied your dinner";
+								}
 								User.sendPush(creatorInfo.deviceToken, msg);
 							}
 						});

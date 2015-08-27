@@ -82,6 +82,13 @@ module.exports = {
 
 		} else {
 			User.findOne({id:param.UserID}, function (err, user) {
+				// set language Info...
+				if (param.RequestParam.langauge != null) {
+					user.langauge = param.RequestParam.langauge;
+					User.update({id:user.id}, user).exec(function (err, res){});
+					OpenfireUser.updateStatus(user.id, user.language);
+				}
+
 				if (err != null) {
 					var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
 					res.end(JSON.stringify(result));
