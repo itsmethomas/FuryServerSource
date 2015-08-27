@@ -111,8 +111,8 @@ module.exports = {
 					user.name = param.RequestParam.name;
 					user.birthday = param.RequestParam.birthday;
 
-					User.update({id:user.id}, user).exec(function (err, result){
-						var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:result}};
+					User.update({id:user.id}, user).exec(function (err, users){
+						var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:users[0]}};
 						res.end(JSON.stringify(result));
 					});
 				} else if (reqMethod == 'editUserAboutMe') {
