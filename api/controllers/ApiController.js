@@ -83,6 +83,7 @@ module.exports = {
 		} else {
 			User.findOne({id:param.UserID}, function (err, user) {
 				// set language Info...
+				console.log(param.RequestParam);
 				if (param.RequestParam.langauge != null) {
 					user.langauge = param.RequestParam.langauge;
 					User.update({id:user.id}, user).exec(function (err, res){});
