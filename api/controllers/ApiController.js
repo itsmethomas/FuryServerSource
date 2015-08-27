@@ -92,13 +92,16 @@ module.exports = {
 				if (err != null) {
 					var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
 					res.end(JSON.stringify(result));
+					return;
 				} else if (user == null) {
 					var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
 					res.end(JSON.stringify(result));
+					return;
 				} else {
 					if (user.apiKey != param.APIKey) {
 						var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Token does not match.'}};
 						res.end(JSON.stringify(result));
+						return;
 					}
 				}
 
