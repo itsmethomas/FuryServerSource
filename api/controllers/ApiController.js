@@ -85,6 +85,7 @@ module.exports = {
 				// set language Info...
 				console.log(param.RequestParam);
 				if (param.RequestParam.langauge != null) {
+					console.log('asdfasdfadf');
 					user.langauge = param.RequestParam.langauge;
 					User.update({id:user.id}, user).exec(function (err, res){});
 					OpenfireUser.updateStatus(user.id, user.language);
