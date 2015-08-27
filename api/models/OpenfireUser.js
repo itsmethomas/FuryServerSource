@@ -30,6 +30,7 @@ module.exports = {
 
 	updateStatus: function (userId, language) {
 		var query = "UPDATE user SET status='" + language + "' WHERE UserID='" + userId + "'";
+		console.log(query);
 		OpenfireUser.query(query, null);
 	}
 };
