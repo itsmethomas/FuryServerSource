@@ -183,7 +183,7 @@ module.exports = {
 				}
 			},
 			type: 1
-		}
+		};
 
 		Dinner.native(function(err, collection) {
 		    collection.ensureIndex({geoLocation:"2dsphere"}, function (err, result) {
@@ -222,12 +222,12 @@ module.exports = {
 				}
 			},
 			type: 0
-		}
+		};
+
+		console.log(condition);
 
 		Dinner.native(function(err, collection) {
 		    collection.ensureIndex({geoLocation:"2dsphere"}, function (err, result) {
-		    	console.log(err);
-		    	console.log(result);
 				Dinner.find(condition).limit(60).skip(param.page * 60).exec(function (err, rows) {
 					if (err) {
 						console.log(err);
