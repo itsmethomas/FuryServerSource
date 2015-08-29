@@ -169,8 +169,6 @@ module.exports = {
 		var userID = param.id;
 		var location = param.geoLocation;
 
-		Dinner.ensureIndex({location:"2dsphere"});
-
 		var condition = {
 			location:{
 				$near:{
