@@ -169,13 +169,16 @@ module.exports = {
 		var userID = param.id;
 		var location = param.geoLocation;
 
-		console.log(param);
-		console.log(location);
-
 		var condition = {
 			location:{
 				$near:{
-					$geometry: location,
+					$geometry: {
+						type: "Point",
+						coordinates: [
+							location.coordinates[0],
+							location.coordinates[1]
+						]
+					},
 					$maxDistance:10000 // 100 mile
 				}
 			},
@@ -206,7 +209,13 @@ module.exports = {
 		var condition = {
 			location:{
 				$near:{
-					$geometry: location,
+					$geometry: {
+						type: "Point",
+						coordinates: [
+							location.coordinates[0],
+							location.coordinates[1]
+						]
+					},
 					$maxDistance:10000 // 100 mile
 				}
 			},
