@@ -181,6 +181,7 @@ module.exports = {
 
 		Dinner.find(condition).limit(60).skip(param.page * 60).exec(function (err, rows) {
 			if (err) {
+				console.log(err);
 				var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
 				res.end(JSON.stringify(result));
 			} else {
@@ -206,6 +207,7 @@ module.exports = {
 
 		Dinner.find(condition).limit(60).skip(param.page * 60).exec(function (err, rows) {
 			if (err) {
+				console.log(err);
 				var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
 				res.end(JSON.stringify(result));
 			} else {
