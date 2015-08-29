@@ -171,20 +171,15 @@ module.exports = {
 
 		var condition = {
 			location:{
-				$geoWithin:{
-					$centerSphere:[
-						[
-							location[0],
-							location[1]
-						],
-						10000 // 100 mile
-					]
+				$geoNear:{
+					$geometry: location,
+					$maxDistance:10000 // 100 mile
 				}
 			},
 			type: 1
 		}
 
-		Dinner.find(condition, function (err, rows) {
+		Dinner.find(condition).limit(60).skip(param.page * 60).exec(function (err, rows) {
 			if (err) {
 				var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
 				res.end(JSON.stringify(result));
@@ -199,22 +194,17 @@ module.exports = {
 		var userID = param.id;
 		var location = param.geoLocation;
 
-		var condition = {
+				var condition = {
 			location:{
-				$geoWithin:{
-					$centerSphere:[
-						[
-							location[0],
-							location[1]
-						],
-						10000 // 100 mile
-					]
+				$geoNear:{
+					$geometry: location,
+					$maxDistance:10000 // 100 mile
 				}
 			},
 			type: 0
 		}
 
-		Dinner.find(condition, function (err, rows) {
+		Dinner.find(condition).limit(60).skip(param.page * 60).exec(function (err, rows) {
 			if (err) {
 				var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
 				res.end(JSON.stringify(result));
