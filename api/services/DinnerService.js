@@ -170,7 +170,7 @@ module.exports = {
 		var location = param.geoLocation;
 
 		var condition = {
-			location:{
+			geoLocation:{
 				$near:{
 					$geometry: {
 						type: "Point",
@@ -186,7 +186,7 @@ module.exports = {
 		}
 
 		Dinner.native(function(err, collection) {
-		    collection.ensureIndex({location:"2dsphere"}, function (err, result) {
+		    collection.ensureIndex({geoLocation:"2dsphere"}, function (err, result) {
 		    	console.log(err);
 		    	console.log(result);
 				Dinner.find(condition).limit(60).skip(param.page * 60).exec(function (err, rows) {
