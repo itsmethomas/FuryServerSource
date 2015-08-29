@@ -208,10 +208,8 @@ module.exports = {
 		var userID = param.id;
 		var location = param.geoLocation;
 
-		Dinner.ensureIndex({location:"2dsphere"});
-
 		var condition = {
-			location:{
+			geoLocation:{
 				$near:{
 					$geometry: {
 						type: "Point",
@@ -226,17 +224,21 @@ module.exports = {
 			type: 0
 		}
 
-		console.log(condition);
-
-		Dinner.find(condition).limit(60).skip(param.page * 60).exec(function (err, rows) {
-			if (err) {
-				console.log(err);
-				var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
-				res.end(JSON.stringify(result));
-			} else {
-				var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:rows}};
-				res.end(JSON.stringify(result));
-			}
+		Dinner.native(function(err, collection) {
+		    collection.ensureIndex({geoLocation:"2dsphere"}, function (err, result) {
+		    	console.log(err);
+		    	console.log(result);
+				Dinner.find(condition).limit(60).skip(param.page * 60).exec(function (err, rows) {
+					if (err) {
+						console.log(err);
+						var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
+						res.end(JSON.stringify(result));
+					} else {
+						var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:rows}};
+						res.end(JSON.stringify(result));
+					}
+				});
+		    });
 		});
 	},
 	getDinnersIApplied: function (param, res) {
