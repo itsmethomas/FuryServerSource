@@ -171,24 +171,21 @@ module.exports = {
 
 		var condition = {
 			geoLocation:{
-				$near:{
-					$geometry: {
-						type: "Point",
-						coordinates: [
-							location.coordinates[0],
-							location.coordinates[1]
-						]
-					},
-					$maxDistance:10000 // 100 mile
+				$geoWithin:{
+					$centerSphere:[
+						location.coordinates[0],
+						location.coordinates[1]
+						], 10000
+					]
 				}
 			},
 			type: 1
 		};
 
+		console.log(condition);
+
 		Dinner.native(function(err, collection) {
 		    collection.ensureIndex({geoLocation:"2dsphere"}, function (err, result) {
-		    	console.log(err);
-		    	console.log(result);
 				Dinner.find(condition).limit(60).skip(param.page * 60).exec(function (err, rows) {
 					if (err) {
 						console.log(err);
@@ -210,15 +207,12 @@ module.exports = {
 
 		var condition = {
 			geoLocation:{
-				$near:{
-					$geometry: {
-						type: "Point",
-						coordinates: [
-							location.coordinates[0],
-							location.coordinates[1]
-						]
-					},
-					$maxDistance:10000 // 100 mile
+				$geoWithin:{
+					$centerSphere:[
+						location.coordinates[0],
+						location.coordinates[1]
+						], 10000
+					]
 				}
 			},
 			type: 0
