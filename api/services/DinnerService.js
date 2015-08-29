@@ -173,8 +173,9 @@ module.exports = {
 			geoLocation:{
 				$geoWithin:{
 					$centerSphere:[
-						location.coordinates[0],
-						location.coordinates[1]
+						[
+							location.coordinates[0],
+							location.coordinates[1]
 						], 10000
 					]
 				}
@@ -209,8 +210,9 @@ module.exports = {
 			geoLocation:{
 				$geoWithin:{
 					$centerSphere:[
-						location.coordinates[0],
-						location.coordinates[1]
+						[
+							location.coordinates[0],
+							location.coordinates[1]
 						], 10000
 					]
 				}
