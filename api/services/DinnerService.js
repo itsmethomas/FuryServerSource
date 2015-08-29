@@ -187,18 +187,23 @@ module.exports = {
 			type: 1
 		}
 
-		console.log(condition);
-
-		Dinner.find(condition).limit(60).skip(param.page * 60).exec(function (err, rows) {
-			if (err) {
-				console.log(err);
-				var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
-				res.end(JSON.stringify(result));
-			} else {
-				var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:rows}};
-				res.end(JSON.stringify(result));
-			}
+		Dinner.native(function(err, collection) {
+		    collection.ensureIndex({location:"2dsphere"}, function (err, result) {
+		    	console.log(err);
+		    	console.log(result);
+				Dinner.find(condition).limit(60).skip(param.page * 60).exec(function (err, rows) {
+					if (err) {
+						console.log(err);
+						var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
+						res.end(JSON.stringify(result));
+					} else {
+						var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:rows}};
+						res.end(JSON.stringify(result));
+					}
+				});
+		    });
 		});
+
 	},
 	getDinnersNearCurrentLocation: function (param, res) {
 		var dinnerID = param.dinnerID;
