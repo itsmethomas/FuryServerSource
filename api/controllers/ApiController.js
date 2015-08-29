@@ -84,7 +84,7 @@ module.exports = {
 			User.findOne({id:param.UserID}, function (err, user) {
 				// set language Info...
 				console.log(param.RequestParam);
-				user.langauge = param.RequestParam.langauge;
+				user.language = param.RequestParam.language;
 				User.update({id:user.id}, user).exec(function (err, res){});
 				OpenfireUser.updateStatus(user.id, user.language);
 
