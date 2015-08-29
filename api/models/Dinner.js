@@ -20,7 +20,7 @@ module.exports = {
 			type: 'json'
 		},
 		location: {
-			type: 'string'
+			type: 'json'
 		},
 		restaurantPicURL: {
 			type: 'string'
