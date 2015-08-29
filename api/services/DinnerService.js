@@ -171,13 +171,15 @@ module.exports = {
 
 		var condition = {
 			location:{
-				$geoNear:{
+				$near:{
 					$geometry: location,
 					$maxDistance:10000 // 100 mile
 				}
 			},
 			type: 1
 		}
+
+		console.log(condition);
 
 		Dinner.find(condition).limit(60).skip(param.page * 60).exec(function (err, rows) {
 			if (err) {
@@ -195,15 +197,17 @@ module.exports = {
 		var userID = param.id;
 		var location = param.geoLocation;
 
-				var condition = {
+		var condition = {
 			location:{
-				$geoNear:{
+				$near:{
 					$geometry: location,
 					$maxDistance:10000 // 100 mile
 				}
 			},
 			type: 0
 		}
+
+		console.log(condition);
 
 		Dinner.find(condition).limit(60).skip(param.page * 60).exec(function (err, rows) {
 			if (err) {
