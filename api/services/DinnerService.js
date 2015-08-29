@@ -169,6 +169,9 @@ module.exports = {
 		var userID = param.id;
 		var location = param.geoLocation;
 
+		console.log(param);
+		console.log(location);
+
 		var condition = {
 			location:{
 				$near:{
@@ -196,6 +199,9 @@ module.exports = {
 		var dinnerID = param.dinnerID;
 		var userID = param.id;
 		var location = param.geoLocation;
+
+		console.log(param);
+		console.log(location);
 
 		var condition = {
 			location:{
