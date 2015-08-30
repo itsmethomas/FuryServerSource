@@ -187,7 +187,7 @@ module.exports = {
 
 		Dinner.native(function(err, collection) {
 		    collection.ensureIndex({geoLocation:"2dsphere"}, function (err, result) {
-				Dinner.find(condition).limit(60).skip(param.page * 60).exec(function (err, rows) {
+				Dinner.find(condition, function (err, rows) {
 					if (err) {
 						console.log(err);
 						var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
@@ -199,7 +199,6 @@ module.exports = {
 				});
 		    });
 		});
-
 	},
 	getDinnersNearCurrentLocation: function (param, res) {
 		var dinnerID = param.dinnerID;
