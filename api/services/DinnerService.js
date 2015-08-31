@@ -180,9 +180,7 @@ module.exports = {
 							location.coordinates[0],
 							location.coordinates[1]
 						]
-					},
-					$maxDistance: 1000000,
-					$minDistance: 0
+					}
 				}
 			},
 			type: '1'
@@ -222,9 +220,7 @@ module.exports = {
 							location.coordinates[0],
 							location.coordinates[1]
 						]
-					},
-					$maxDistance: 1000000,
-					$minDistance: 0
+					}
 				}
 			},
 			type: '0'
