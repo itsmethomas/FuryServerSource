@@ -170,24 +170,26 @@ module.exports = {
 		var location = param.geoLocation;
 
 		var condition = {
-			geoLocation:{
-				$geoWithin:{
-					$centerSphere:[
+			"geoLocation":{
+				$near:{
+					$geometry: {
+						type: "Point",
+						coordinates:
 						[
 							location.coordinates[0],
 							location.coordinates[1]
-						], 10000
-					]
+						]
+					},
+					$maxDistance: 1000000,
+					$minDistance: 0
 				}
 			},
-			type: 1
+			type: '1'
 		};
-
-		console.log(condition);
 
 		Dinner.native(function(err, collection) {
 		    collection.ensureIndex({geoLocation:"2dsphere"}, function (err, result) {
-				Dinner.find(condition, function (err, rows) {
+				Dinner.find({where:condition, limit:60, skip:(page * 60)}, function (err, rows) {
 					if (err) {
 						console.log(err);
 						var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
@@ -199,31 +201,35 @@ module.exports = {
 				});
 		    });
 		});
+
 	},
 	getDinnersNearCurrentLocation: function (param, res) {
 		var dinnerID = param.dinnerID;
 		var userID = param.id;
 		var location = param.geoLocation;
+		var page = param.page;
 
 		var condition = {
-			geoLocation:{
-				$geoWithin:{
-					$centerSphere:[
+			"geoLocation":{
+				$near:{
+					$geometry: {
+						type: "Point",
+						coordinates:
 						[
 							location.coordinates[0],
 							location.coordinates[1]
-						], 10000
-					]
+						]
+					},
+					$maxDistance: 1000000,
+					$minDistance: 0
 				}
 			},
-			type: 0
+			type: '0'
 		};
-
-		console.log(condition);
 
 		Dinner.native(function(err, collection) {
 		    collection.ensureIndex({geoLocation:"2dsphere"}, function (err, result) {
-				Dinner.find(condition).limit(60).skip(param.page * 60).exec(function (err, rows) {
+				Dinner.find({where:condition, limit:60, skip:(page * 60)}, function (err, rows) {
 					if (err) {
 						console.log(err);
 						var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
@@ -235,7 +241,9 @@ module.exports = {
 				});
 		    });
 		});
+
 	},
+
 	getDinnersIApplied: function (param, res) {
 		var userId = param.id;
 		DinnerApply.find({applyUserId:userId}, function (err, rows) {
