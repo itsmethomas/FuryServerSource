@@ -89,7 +89,7 @@ module.exports = {
 	},
 
 	setDinnerInfo: function (userInfo, res) {
-		Dinner.find({creator:userInfo.id}, function (err, dinners) {
+		Dinner.find({creatorID:userInfo.id}, function (err, dinners) {
 			var createdDinnerList = [];
 			for (i=0; i<dinners.length; i++){
 				createdDinnerList.push(dinners[i].id);
