@@ -168,6 +168,7 @@ module.exports = {
 		var dinnerID = param.dinnerID;
 		var userID = param.id;
 		var location = param.geoLocation;
+		var page = param.page;
 
 		var condition = {
 			"geoLocation":{
