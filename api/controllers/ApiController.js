@@ -190,10 +190,10 @@ module.exports = {
 				} else if (reqMethod == 'fetchAllDinners') {
 					DinnerService.fetchAllDinners(param.RequestParam, res);
 
-				} else if (reqMethod == 'getDatesNearCurrentLocation') {
+				} else if (reqMethod == 'getNearbyDates') {
 					DinnerService.getDatesNearCurrentLocation(param.RequestParam, res);
 
-				} else if (reqMethod == 'getDinnersNearCurrentLocation') {
+				} else if (reqMethod == 'getNearbyDinners') {
 					DinnerService.getDinnersNearCurrentLocation(param.RequestParam, res);
 
 				} else if (reqMethod == 'applyDinner') {
