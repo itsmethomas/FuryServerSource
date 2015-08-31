@@ -190,6 +190,8 @@ module.exports = {
 
 		Dinner.native(function(err, collection) {
 		    collection.ensureIndex({geoLocation:"2dsphere"}, function (err, result) {
+		    	console.log(err);
+		    	console.log(result);
 				Dinner.find({where:condition, limit:60, skip:(page * 60)}, function (err, rows) {
 					if (err) {
 						console.log(err);
