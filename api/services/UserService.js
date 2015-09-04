@@ -105,7 +105,7 @@ module.exports = {
 				res.end(JSON.stringify(result));
 			});
 		});
-	},
+	}, 
 
 	loginWithFacebook: function (param, res) {
 		User.find({facebookID:param.facebookID}, function (err, users) {

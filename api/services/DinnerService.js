@@ -196,8 +196,7 @@ module.exports = {
 						var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
 						res.end(JSON.stringify(result));
 					} else {
-						var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:rows}};
-						res.end(JSON.stringify(result));
+						DinnerService.setCreatorInfo(rows, res);
 					}
 				});
 		    });
@@ -234,8 +233,7 @@ module.exports = {
 						var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
 						res.end(JSON.stringify(result));
 					} else {
-						var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:rows}};
-						res.end(JSON.stringify(result));
+						DinnerService.setCreatorInfo(rows, res);
 					}
 				});
 		    });
@@ -243,6 +241,42 @@ module.exports = {
 
 	},
 
+	setCreatorInfo: function (dinners, res) {
+		var creatorIdArray = [];
+		for (i=0; i<dinners.length; i++ ) {
+			creatorIdArray.push(dinners[i].creatorID);
+		}
+
+		console.log(creatorIdArray);
+
+		User.find({id: {$in:creatorIdArray}}, function (err, users) {
+			if (err != null) {
+				var result = {FuryResponse:{ResponseResult:'NO', ResponseContent:'Internal Server Error'}};
+				res.end(JSON.stringify(result));
+				return;
+			}
+
+			for (i=0; i<users.length; i++) {
+				var creatorInfo = users[i];
+				delete creatorInfo.password;
+				delete creatorInfo.apiKey;
+				delete creatorInfo.openfire_password;
+			}
+
+			for (i=0; i<dinners.length; i++) {
+				var dinnerInfo = dinners[i];
+				for (j=0; j<users.length; j++) {
+					if (users[j].id == dinnerInfo.creatorID) {
+						dinnerInfo.creatorInfo = users[j];
+						break;
+					}
+				}
+			}
+
+			var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:dinners}};
+			res.end(JSON.stringify(result));
+		})
+	},
 	getDinnersIApplied: function (param, res) {
 		var userId = param.id;
 		DinnerApply.find({applyUserId:userId}, function (err, rows) {
@@ -262,7 +296,7 @@ module.exports = {
 				}
 			});
 		});
-	},
+	}, 
 	getDinnersICreated: function (param, res) {
 		var userId = param.id;
 		Dinner.find({creatorID: userId}, function (err, dinners) {
