@@ -24,10 +24,10 @@ module.exports = {
 
 		var http = require("http");
 
-		var pathComp = "/plugins/userService/userservice?type=add&secret=T1N15RwD&username="
+		var pathComp = "/plugins/userService/userservice?type=add&secret=e0903HoJ&username="
 					+ username + "&password=" + password + "&name=" + encodeURIComponent(name) + "&email=" + encodeURIComponent(email);
 		var ops = {
-		  host: '52.8.37.193',
+		  host: '52.20.40.191',
 		  port: 9090,
 		  path: pathComp,
 		  method: 'GET'
