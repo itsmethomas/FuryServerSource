@@ -55,7 +55,7 @@ module.exports = {
 			  port: 25,
 			  auth: {
 			    user: 'recoverpwd@godinnery.com',
-			    pass: 'RecoverPassword1'
+			    pass: "BP3MkLvfMk8ghw<}'m9_d@Xa"
 			  }
 			}));
 
@@ -63,7 +63,7 @@ module.exports = {
 			//     service: 'Gmail',
 			//     auth: {
 			//         user: 'no-reply@mandoo.com.hk',
-			//         pass: 'mandoo1234'
+			//         pass: 'mandoo123'
 			//     }
 			// });
 
