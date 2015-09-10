@@ -370,23 +370,23 @@ module.exports = {
 			console.log(link);
 
 			var nodemailer = require('nodemailer');
-			// var smtpTransport = require('nodemailer-smtp-transport');
-			// var transport = nodemailer.createTransport(smtpTransport({
-			//   host: '52.8.37.193',
-			//   port: 587,
-			//   auth: {
-			//     user: 'ubuntu',
-			//     pass: '123'
-			//   }
-			// }));
+			var smtpTransport = require('nodemailer-smtp-transport');
+			var transport = nodemailer.createTransport(smtpTransport({
+			  host: 'smtp.mxhichina.com',
+			  port: 25,
+			  auth: {
+			    user: 'no-reply@godinnery.com',
+			    pass: 'Tnx-29ZVyf'
+			  }
+			}));
 
-			var transport = nodemailer.createTransport({
-			    service: 'Gmail',
-			    auth: {
-			        user: 'no-reply@mandoo.com.hk',
-			        pass: 'mandoo1234'
-			    }
-			});
+			// var transport = nodemailer.createTransport({
+			//     service: 'Gmail',
+			//     auth: {
+			//         user: 'no-reply@mandoo.com.hk',
+			//         pass: 'mandoo1234'
+			//     }
+			// });
 
 			transport.sendMail({
 				from: 'Mandoo',

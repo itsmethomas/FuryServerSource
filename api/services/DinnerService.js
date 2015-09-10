@@ -109,6 +109,7 @@ module.exports = {
 				}
 
 				Dinner.update({id:dinnerID}, dinnerInfo).exec(function (err, result){});
+				DinnerApply.remove({dinnerId:dinnerID, applyUserId:userID}, function (err, result){});
 
 				var result = {FuryResponse:{ResponseResult:'YES', ResponseContent:dinnerInfo}};
 				res.end(JSON.stringify(result));

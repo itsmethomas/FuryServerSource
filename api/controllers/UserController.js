@@ -40,6 +40,47 @@ module.exports = {
 
 			res.view('recover/recover_done.ejs', {});
 		})
+	},
+	emailTest: function (req, res) {
+		require("fs").readFile("./assets/templates/mail_template.ejb", 'utf-8', function (err, emailcontents) {
+			console.log(err);
+
+			emailcontents = emailcontents.replace('USER_NAME', "Thomas");
+			emailcontents = emailcontents.replace('RESET_LINK', "http://www.google.com/");
+
+			var nodemailer = require('nodemailer');
+			var smtpTransport = require('nodemailer-smtp-transport');
+			var transport = nodemailer.createTransport(smtpTransport({
+			  host: 'smtp.mxhichina.com',
+			  port: 25,
+			  auth: {
+			    user: 'recoverpwd@godinnery.com',
+			    pass: 'RecoverPassword1'
+			  }
+			}));
+
+			// var transport = nodemailer.createTransport({
+			//     service: 'Gmail',
+			//     auth: {
+			//         user: 'no-reply@mandoo.com.hk',
+			//         pass: 'mandoo1234'
+			//     }
+			// });
+
+			transport.sendMail({
+				from: 'Mandoo',
+				to: 'taeyong325@hotmail.com',
+				subject: 'Forgot Password?',
+				html: emailcontents
+			}, function(err, responseStatus) {
+				if (err) {
+					console.log(err);
+				} else {
+					console.log(responseStatus.message);
+				}
+	        });
+        });
+		res.end('aa');
 	}
 };
 

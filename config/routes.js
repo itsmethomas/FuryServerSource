@@ -58,5 +58,9 @@ module.exports.routes = {
     controller    : 'User',
     action        : 'savePassword',
     view          : 'recover_done.ejs'
+  },
+  'get /emailTest': {
+    controller    : 'User',
+    action        : 'emailTest',
   }
  };
