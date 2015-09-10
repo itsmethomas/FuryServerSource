@@ -52,7 +52,8 @@ module.exports = {
 			var smtpTransport = require('nodemailer-smtp-transport');
 			var transport = nodemailer.createTransport(smtpTransport({
 			  host: 'smtp.mxhichina.com',
-			  port: 25,
+			  port: 465,
+			  secure: true,
 			  auth: {
 			    user: 'recoverpwd@godinnery.com',
 			    pass: "BP3MkLvfMk8ghw<}'m9_d@Xa"
