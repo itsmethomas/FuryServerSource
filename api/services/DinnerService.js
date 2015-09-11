@@ -73,21 +73,16 @@ module.exports = {
 						}
 
 						// send APNS
-						console.log(dinnerInfo.creatorID);
 						User.findOne({id:dinnerInfo.creatorID}, function (err, creatorInfo) {
 							if (creatorInfo != null) {
-								var lang_setting = creatorInfo.language.toString().trim();
-								console.log('lll - "' + lang_setting + '"');
 								var msg = userInfo.name;
-								if (lang_setting == 'zh-hant') {
+								if (creatorInfo.language == User.LANGUAGE_CHINESE_TRADITIONAL) {
 									msg += " 剛剛申請了您的約飯";
-								} else if (lang_setting == 'zh_hans') {
+								} else if (creatorInfo.language == User.LANGUAGE_CHINESE_SIMPLIFIED) {
 									msg += " 刚刚申请了你的约饭";
 								} else {
 									msg += " just applied your dinner";
 								}
-
-								console.log(msg);
 								User.sendPush(creatorInfo.deviceToken, msg);
 							}
 						});

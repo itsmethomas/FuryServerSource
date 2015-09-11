@@ -5,6 +5,9 @@
 * @docs        :: http://sailsjs.org/#!documentation/models
 */
 module.exports = {
+	LANGUAGE_EN: 'en',
+	LANGUAGE_CHINESE_TRADITIONAL: 'zh-hant',
+	LANGUAGE_CHINESE_SIMPLIFIED: 'zh-hans',
 		
 	attributes: {
 		name: {
