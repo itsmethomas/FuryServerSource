@@ -76,7 +76,7 @@ module.exports = {
 						console.log(dinnerInfo.creatorID);
 						User.findOne({id:dinnerInfo.creatorID}, function (err, creatorInfo) {
 							if (creatorInfo != null) {
-								console.log(creatorInfo);
+								console.log('lll - ' + creatorInfo.language);
 								var msg = userInfo.name;
 								if (creatorInfo.language == 'zh_hant') {
 									msg += " 剛剛申請了您的約飯";
