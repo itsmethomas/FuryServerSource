@@ -4,6 +4,9 @@
 * @description :: TODO: You might write a short summary of how this model works and what it represents here.
 * @docs        :: http://sailsjs.org/#!documentation/models
 */
+var LANGUAGE_EN: 'en';
+var LANGUAGE_CHINESE_TRADITIONAL: 'zh_hant';
+var LANGUAGE_CHINESE_SIMPLIFIED: 'zh_hans';
 
 module.exports = {
 	LANGUAGE_EN: 'en',
