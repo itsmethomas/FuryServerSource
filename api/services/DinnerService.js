@@ -78,9 +78,9 @@ module.exports = {
 							if (creatorInfo != null) {
 								console.log('lll - ' + creatorInfo.language);
 								var msg = userInfo.name;
-								if (creatorInfo.language == 'zh_hant') {
+								if (creatorInfo.language.trim() == 'zh_hant') {
 									msg += " 剛剛申請了您的約飯";
-								} else if (creatorInfo.language == 'zh_hans') {
+								} else if (creatorInfo.language.trim() == 'zh_hans') {
 									msg += " 刚刚申请了你的约饭";
 								} else {
 									msg += " just applied your dinner";
