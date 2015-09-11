@@ -76,11 +76,12 @@ module.exports = {
 						console.log(dinnerInfo.creatorID);
 						User.findOne({id:dinnerInfo.creatorID}, function (err, creatorInfo) {
 							if (creatorInfo != null) {
-								console.log('lll - ' + creatorInfo.language);
+								var lang_setting = creatorInfo.language.toString().trim();
+								console.log('lll - ' + lang_setting);
 								var msg = userInfo.name;
-								if (creatorInfo.language.trim() == 'zh_hant') {
+								if (lang_setting == 'zh_hant') {
 									msg += " 剛剛申請了您的約飯";
-								} else if (creatorInfo.language.trim() == 'zh_hans') {
+								} else if (lang_setting == 'zh_hans') {
 									msg += " 刚刚申请了你的约饭";
 								} else {
 									msg += " just applied your dinner";
