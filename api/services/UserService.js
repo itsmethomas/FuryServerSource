@@ -337,7 +337,7 @@ module.exports = {
 			} else {
 				var correctUser = null;
 				for (var i=0; i<users.length; i++) {
-					if ((users[i].facebookID == null || users[i].facebookID == '') && (users[i].facebookID == null || users[i].facebookID == '')) {
+					if ((users[i].facebookID == null || users[i].facebookID == '') && (users[i].weChatID == null || users[i].weChatID == '')) {
 						correctUser = users[i];
 						break;
 					}
