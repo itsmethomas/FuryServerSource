@@ -76,9 +76,9 @@ module.exports = {
 						User.findOne({id:dinnerInfo.creatorID}, function (err, creatorInfo) {
 							if (creatorInfo != null) {
 								var msg = userInfo.name;
-								if (creatorInfo.language == User.LANGUAGE_CHINESE_TRADITIONAL) {
+								if (creatorInfo.language == 'zh-hant') {
 									msg += " 剛剛申請了您的約飯";
-								} else if (creatorInfo.language == User.LANGUAGE_CHINESE_SIMPLIFIED) {
+								} else if (creatorInfo.language == 'zh-hans') {
 									msg += " 刚刚申请了你的约饭";
 								} else {
 									msg += " just applied your dinner";
